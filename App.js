@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { StackNavigator } from "react-navigation";
+import { createStackNavigator } from "react-navigation";
 import UserListScreen from "./src/screens/User/ListScreen";
 import HomeScreen from "./src/screens/HomeScreen";
 
-const AppNavigator = StackNavigator(
+const AppNavigator = createStackNavigator(
   {
     Home: { screen: HomeScreen },
     UserList: { screen: UserListScreen }
