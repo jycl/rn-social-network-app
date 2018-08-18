@@ -3,6 +3,7 @@ import { createStackNavigator } from "react-navigation";
 import UserListScreen from "./src/screens/User/ListScreen";
 import HomeScreen from "./src/screens/HomeScreen";
 import { Provider, observer } from "mobx-react";
+import stores from "./src/stores";
 
 const AppNavigator = createStackNavigator(
   {
@@ -24,7 +25,7 @@ const AppNavigator = createStackNavigator(
 export default class App extends Component {
   render() {
     return (
-      <Provider>
+      <Provider {...stores}>
         <AppNavigator />
       </Provider>
     );
