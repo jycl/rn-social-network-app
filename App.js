@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { createStackNavigator } from "react-navigation";
-import { Provider, observer } from "mobx-react/native";
 import UserListScreen from "./src/screens/User/ListScreen";
 import HomeScreen from "./src/screens/HomeScreen";
 
@@ -20,15 +19,8 @@ const AppNavigator = createStackNavigator(
   }
 );
 
-@observer
-class App extends Component {
+export default class App extends Component {
   render() {
-    return (
-      <Provider>
-        <AppNavigator />
-      </Provider>
-    );
+    return <AppNavigator />;
   }
 }
-
-export default App;
