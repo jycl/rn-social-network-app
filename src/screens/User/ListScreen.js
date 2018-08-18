@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import colors from "../../styles/colors";
 
 /**
  * UserListScreen is a screen that renders UI components displaying
@@ -20,7 +21,7 @@ class UserListScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5FCFF"
+    backgroundColor: colors.cream
   },
   header: {
     margin: 10
