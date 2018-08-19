@@ -2,6 +2,9 @@ import userStore from "../userStore";
 import Constants from "../../config/constants";
 
 describe("UserContainer tests ", () => {
+  it("Snapshot test of UserStore", () => {
+    expect(userStore).toMatchSnapshot();
+  });
   it("Check initial state values", () => {
     expect(userStore.rawUserList).toHaveLength(0);
     expect(userStore.filteredUserList).toHaveLength(0);
