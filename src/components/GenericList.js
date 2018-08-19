@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-  View,
-  FlatList,
-  Text,
-  StyleSheet,
-  TouchableOpacity
-} from "react-native";
+import { View, FlatList, StyleSheet, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 import colors from "../styles/colors";
 import fontSize from "../styles/fontSize";
@@ -19,6 +13,7 @@ import fontSize from "../styles/fontSize";
  * @property {array} data array of objects that each represent each row to display their props
  * @property {func} onPress callback method invoked when item row is pressed
  * @property {func} renderRowItem render method that returns a custom JSX component for each list row
+ * @property {bool} disabled indicator to disable on press callback / animation for row items
  *
  * @author Joshua Leung <joshuaycleung@gmail.com>
  */
@@ -40,6 +35,7 @@ class GenericList extends Component {
   _renderUserRow = ({ item, index }) => {
     return (
       <TouchableOpacity
+        disabled={this.props.onPressDisabled}
         onPress={() => this.props.onPress(item)}
         style={styles.listItemContainer}
       >
@@ -79,13 +75,15 @@ const styles = StyleSheet.create({
 GenericList.propTypes = {
   data: PropTypes.array,
   onPress: PropTypes.func,
-  renderRowItem: PropTypes.func
+  renderRowItem: PropTypes.func,
+  onPressDisabled: PropTypes.bool
 };
 
 GenericList.defaultProps = {
   data: [],
   onPress: () => {},
-  renderRowItem: () => <View />
+  renderRowItem: () => <View />,
+  onPressDisabled: false
 };
 
 export default GenericList;
