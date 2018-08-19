@@ -13,6 +13,8 @@ import { getUserList } from "../services/APIService";
 class UserStore {
   @observable
   rawUserList = [];
+  @observable
+  selectedUser = null;
 
   /**
    * Retrieve user list from backend and save to store
@@ -23,6 +25,40 @@ class UserStore {
       this.rawUserList = rawUserList;
     });
   };
+
+  /**
+   * Set the selected user (with displayed profile details)
+   * @param {Object} user object selected from user list
+   */
+  @action
+  selectUser = user => {
+    this.selectedUser = user;
+  };
+
+  /**
+   * @return {Object} object with selected user details to display.
+   * Properties address and workplace are extracted from the original
+   * selectedUser object.
+   */
+  @computed
+  get selectedUserDetails() {
+    const {
+      city,
+      street,
+      suite,
+      company,
+      email,
+      name,
+      phone
+    } = this.selectedUser;
+    return {
+      name,
+      email,
+      phone,
+      address: `${suite} ${street}, ${city}`,
+      workplace: company.name
+    };
+  }
 
   /**
    * Sort user list before returning to display on UI, note that computed
