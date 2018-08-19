@@ -23,6 +23,11 @@ class TodoStore {
     });
   };
 
+  @action
+  clearData() {
+    this.rawTodoList = [];
+  }
+
   @computed
   get todoList() {
     return toJS(this.rawTodoList);

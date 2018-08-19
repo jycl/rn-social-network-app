@@ -40,6 +40,12 @@ class PhotoStore {
     return this.albumPhotoListMapping[albumId];
   };
 
+  @action
+  clearData() {
+    this.rawAlbumList = [];
+    this.currentAlbum = null;
+  }
+
   @computed
   get albumList() {
     return toJS(this.rawAlbumList);

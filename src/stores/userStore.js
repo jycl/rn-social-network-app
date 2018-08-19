@@ -70,6 +70,15 @@ class UserStore {
     }
   }
 
+  @action
+  resetSelection = () => {
+    this.selectedUser = null;
+    this.selectedTab = Constants.TAB_OPTION.POSTS;
+    postStore.clearData();
+    photoStore.clearData();
+    todoStore.clearData();
+  };
+
   isHighlighted = tabTitle => {
     return tabTitle === this.selectedTab;
   };
@@ -81,6 +90,9 @@ class UserStore {
    */
   @computed
   get selectedUserDetails() {
+    if (!this.selectedUser) {
+      return {};
+    }
     const { address, company, email, name, phone } = this.selectedUser;
     const { city, street, suite } = address;
     return {

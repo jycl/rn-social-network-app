@@ -44,6 +44,13 @@ class PostStore {
     });
   };
 
+  @action
+  clearData() {
+    this.rawPostList = [];
+    this.currentPost = null;
+    this.currentPostComments = [];
+  }
+
   @computed
   get postList() {
     return toJS(this.rawPostList);
