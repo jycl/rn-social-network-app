@@ -1,5 +1,5 @@
 import { observable, computed, toJS, action } from "mobx";
-import { getAlbumsForUser } from "../services/APIService";
+import { getAlbumsForUser, getPhotosForAlbum } from "../services/APIService";
 
 /**
  * PhotoStore is an MobX store that manages the state values of components related
@@ -13,6 +13,12 @@ class PhotoStore {
   @observable
   rawAlbumList = [];
 
+  @observable
+  currentAlbum = null;
+
+  @observable
+  albumPhotoListMapping = new Map();
+
   /**
    * Retrieve user list from backend and save to store
    */
@@ -20,6 +26,19 @@ class PhotoStore {
   loadAlbums = userId => {
     getAlbumsForUser(userId).then(albums => {
       this.rawAlbumList = albums;
+      this.loadPhotosForAlbums(albums);
+    });
+  };
+
+  @action
+  setCurrentAlbum = album => {
+    this.currentAlbum = album;
+  };
+
+  @action
+  loadPhotoForAlbumId = albumId => {
+    getPhotosForAlbum(albumId).then(photos => {
+      this.albumPhotoListMapping[albumId] = photos;
     });
   };
 
