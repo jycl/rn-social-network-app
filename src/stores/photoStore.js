@@ -23,9 +23,14 @@ class PhotoStore {
    * Retrieve user list from backend and save to store
    */
   @action
-  loadAlbums = userId => {
+  loadPhotoAlbums = userId => {
     getAlbumsForUser(userId).then(albums => {
-      this.rawAlbumList = albums;
+      albums.forEach(async album => {
+        let photos = await getPhotosForAlbum(album.id);
+        album.photoCount = photos.length;
+        this.albumPhotoListMapping[album.id] = photos;
+        this.rawAlbumList.push(album);
+      });
     });
   };
 
@@ -48,7 +53,21 @@ class PhotoStore {
 
   @computed
   get albumList() {
-    return toJS(this.rawAlbumList);
+    let filteredArray = toJS(this.rawAlbumList)
+      .concat()
+      .sort((lhsUser, rhsUser) => {
+        var idLeft = lhsUser.id;
+        var idRight = rhsUser.id; // ignore upper and lowercase
+        if (idLeft < idRight) {
+          return -1;
+        }
+        if (idLeft > idRight) {
+          return 1;
+        }
+        // names must be equal
+        return 0;
+      });
+    return filteredArray;
   }
 }
 const photoStore = new PhotoStore();

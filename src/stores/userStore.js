@@ -60,7 +60,7 @@ class UserStore {
         postStore.loadPostHistory(this.selectedUser.id);
         break;
       case Constants.TAB_OPTION.ALBUMS:
-        photoStore.loadAlbums(this.selectedUser.id);
+        photoStore.loadPhotoAlbums(this.selectedUser.id);
         break;
       case Constants.TAB_OPTION.TODOS:
         todoStore.loadTodoList(this.selectedUser.id);
