@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import colors from "../../styles/colors";
 import { inject, observer } from "mobx-react";
 import Tab from "../../components/Tab";
@@ -10,6 +10,7 @@ import AlbumListItem from "../../components/AlbumListItem";
 import TodoListItem from "../../components/TodoListItem";
 import UserDetailCard from "../../components/UserDetailCard";
 import { getInitialsFromName } from "../../utility/DataFormatHelper";
+import PropTypes from "prop-types";
 
 /**
  * UserDetailScreen is a screen that renders two main UI components.
@@ -24,7 +25,7 @@ import { getInitialsFromName } from "../../utility/DataFormatHelper";
 class UserDetailScreen extends Component {
   componentDidMount() {
     const { id } = this.props.userStore.selectedUser;
-    this.props.postStore.loadPostHistory(id);
+    this.props.postStore.loadPostHistory(id); //load the default tab selection details
   }
 
   render() {
@@ -68,8 +69,11 @@ class UserDetailScreen extends Component {
   onPressTab = tabCategory => this.props.userStore.selectTab(tabCategory);
 
   /**
-   * Render the list with correct data according to the selected tab: Posts, Albums or Todos.
+   * Render the list with correct data, props passed and corresponding component for
+   * each GenericList row according to the selected tab: Posts, Albums or Todos.
    * @param {String} category compare with constants to check which list to render.
+   * @return {JSX<Component>} <GenericList> with renderRowItem corresponding to category
+   *                          default <View> if category is not matched with switch-case.
    */
   renderCategoryList(category) {
     switch (category) {
@@ -116,12 +120,21 @@ class UserDetailScreen extends Component {
     }
   }
 
+  /**
+   * Update PostStore with selected post Object, load related comments and
+   * navigate to PostCommentScreen.
+   * @param {Object} post
+   */
   onPressPostItem = post => {
     this.props.postStore.setCurrentPost(post);
     this.props.postStore.loadPostComments(post.id);
     this.props.navigation.navigate("PostComment");
   };
 
+  /**
+   * Update PhotoStore with selected album Object and navigate to PhotoGridScreen.
+   * @param {Object} album
+   */
   onPressPhotoAlbum = album => {
     this.props.photoStore.setCurrentAlbum(album);
     this.props.navigation.navigate("PhotoGrid");
@@ -145,5 +158,13 @@ const styles = StyleSheet.create({
     backgroundColor: colors.darkBlue
   }
 });
+
+//to test injected stores
+UserDetailScreen.wrappedComponent.propTypes = {
+  userStore: PropTypes.object.isRequired,
+  postStore: PropTypes.object.isRequired,
+  photoStore: PropTypes.object.isRequired,
+  todoStore: PropTypes.object.isRequired
+};
 
 export default UserDetailScreen;

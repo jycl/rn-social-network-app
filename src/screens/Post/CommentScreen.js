@@ -1,14 +1,18 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import colors from "../../styles/colors";
 import { inject, observer } from "mobx-react";
 import GenericList from "../../components/GenericList";
 import PostListItem from "../../components/PostListItem";
 import CommentItem from "../../components/CommentItem";
+import PropTypes from "prop-types";
 
 /**
- * PostCommentScreen is a screen that renders the selected post
- * and all comments related to that post.
+ * PostCommentScreen is a screen that manages the views rendered for the
+ * selected post and all comments related to that post.
+ *
+ * Props:
+ * @property {Object} postStore injected store current post and related comments
  *
  * @author Joshua Leung <joshuaycleung@gmail.com>
  */
@@ -31,8 +35,13 @@ class PostCommentScreen extends Component {
     );
   }
 
-  renderComment = item => {
-    const { name, body, email } = item;
+  /**
+   * Render method that extracts required values from item and passes into
+   * component as props.
+   * @param {Object} comment Object record from postStore
+   */
+  renderComment = comment => {
+    const { name, body, email } = comment;
     return <CommentItem title={name} body={body} author={email} />;
   };
 }
@@ -50,5 +59,9 @@ const styles = StyleSheet.create({
     padding: 5
   }
 });
+
+PostCommentScreen.wrappedComponent.propTypes = {
+  postStore: PropTypes.object.isRequired //to test injected stores
+};
 
 export default PostCommentScreen;

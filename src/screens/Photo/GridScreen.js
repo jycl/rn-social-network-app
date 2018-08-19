@@ -6,10 +6,14 @@ import Constants from "../../config/constants";
 import { formatDataForGrid } from "../../utility/DataFormatHelper";
 import colors from "../../styles/colors";
 import Photo from "../../components/Photo";
+import PropTypes from "prop-types";
 
 /**
  * PhotoGridScreen is a screen that renders a grid of photos for a specific
  * album.
+ *
+ * Props:
+ * @property {Object} photoStore injected store containing photos for selected album
  *
  * @author Joshua Leung <joshuaycleung@gmail.com>
  */
@@ -24,7 +28,7 @@ class PhotoGridScreen extends Component {
       { isPlaceholder: true }
     );
     return (
-      <View style={{ flex: 1, backgroundColor: colors.darkBlue }}>
+      <View style={styles.container}>
         <Grid
           data={formattedData}
           numColumns={Constants.NUM_GRID_COLUMNS}
@@ -55,11 +59,19 @@ class PhotoGridScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.darkBlue
+  },
   placeholder: {
     flex: 1,
     padding: 10,
     backgroundColor: "transparent"
   }
 });
+
+PhotoGridScreen.wrappedComponent.propTypes = {
+  photoStore: PropTypes.object.isRequired //to test injected stores
+};
 
 export default PhotoGridScreen;
