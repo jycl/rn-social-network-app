@@ -1,26 +1,17 @@
 import React, { Component } from "react";
-import {
-  Image,
-  View,
-  FlatList,
-  StyleSheet,
-  TouchableOpacity
-} from "react-native";
+import { View, FlatList, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
-import colors from "../styles/colors";
 import Photo from "./Photo";
 
 /**
- * PhotoGrid component renders a FlatList with data from the userList props.
- * The list displays users' names retrieved from the backend and allows the
- * app user to press the list item to navigate to get more details (via onPress props).
+ * PhotoGrid component renders a FlatList with numColumns props to form a grid.
+ * The items rendered are photos (Images rendered with url from data).
  *
  * Props:
- * @property {array} data array of objects that each represent each row to display their props
- * @property {func} onPress callback method invoked when item row is pressed
- * @property {func} renderRowItem render method that returns a custom JSX component for each list row
- * @property {bool} disabled indicator to disable on press callback / animation for row items
- *
+ * @property {array} data array of objects that each represent a photo record
+ * @property {func} onPress callback method invoked when photo is pressed
+ * @property {number} numColumns number of columns to render grid by
+
  * @author Joshua Leung <joshuaycleung@gmail.com>
  */
 class PhotoGrid extends Component {
@@ -38,18 +29,13 @@ class PhotoGrid extends Component {
   /**
    * Render each list item as button passing row item into props.onPress
    */
-  renderPhotoItem = ({ item, index }) => {
+  renderPhotoItem = ({ item }) => {
     if (item.isPlaceholder) {
-      return <View style={styles.listItemContainer} />;
+      return <View style={styles.placeholder} />;
     }
     const { thumbnailUrl } = item;
-    return <Photo url={thumbnailUrl} />;
+    return <Photo url={thumbnailUrl} onPress={this.props.onPress} />;
   };
-
-  /**
-   *  Seperator component rendered between each row
-   */
-  _renderSeparator = () => <View style={styles.separator} />;
 
   /**
    *  Set list item key by the user Id from backend and its index
@@ -58,12 +44,7 @@ class PhotoGrid extends Component {
 }
 
 const styles = StyleSheet.create({
-  separator: {
-    backgroundColor: colors.darkBlue,
-    height: 2,
-    width: "100%"
-  },
-  listItemContainer: {
+  placeholder: {
     flex: 1,
     padding: 10,
     backgroundColor: "transparent"
