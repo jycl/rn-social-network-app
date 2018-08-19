@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    paddingVertical: 10,
     backgroundColor: colors.darkestBlue
   },
   text: {
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
     color: colors.cream
   },
   highlighted: {
-    backgroundColor: colors.cream
+    backgroundColor: colors.lightestBlue
   },
   highlightedText: {
     color: colors.darkestBlue

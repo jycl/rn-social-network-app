@@ -8,8 +8,8 @@ class PostListItem extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.listItemText}>{this.props.title}</Text>
-        <Text style={styles.listItemText}>{this.props.body}</Text>
+        <Text style={styles.title}>{this.props.title}</Text>
+        <Text style={styles.body}>{this.props.body}</Text>
       </View>
     );
   }
@@ -17,19 +17,24 @@ class PostListItem extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: "flex-start",
     alignItems: "flex-start",
     backgroundColor: "transparent"
   },
-  listItemContainer: {
+  rowContainer: {
     padding: 10,
     backgroundColor: colors.blue
   },
-  listItemText: {
+  title: {
+    fontWeight: "bold",
     color: colors.cream,
-    paddingVertical: 10,
+    padding: 10,
     fontSize: fontSize.medium
+  },
+  body: {
+    color: colors.cream,
+    padding: 10,
+    fontSize: fontSize.small
   }
 });
 
