@@ -17,6 +17,9 @@ class PhotoStore {
   currentAlbum = null;
 
   @observable
+  currentPhoto = null;
+
+  @observable
   albumPhotoListMapping = new Map();
 
   /**
@@ -40,15 +43,16 @@ class PhotoStore {
   };
 
   @action
-  loadPhotoForAlbumId = async albumId => {
-    this.albumPhotoListMapping[albumId] = await getPhotosForAlbum(albumId);
-    return this.albumPhotoListMapping[albumId];
+  setCurrentPhoto = photo => {
+    this.currentPhoto = photo;
   };
 
   @action
   clearData() {
     this.rawAlbumList = [];
+    this.albumPhotoListMapping = new Map();
     this.currentAlbum = null;
+    this.currentPhoto = null;
   }
 
   @computed
