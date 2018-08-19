@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import GenericList from "../../components/GenericList";
 import UserListItem from "../../components/UserListItem";
 import colors from "../../styles/colors";
+import fontSize from "../../styles/fontSize";
 import { inject, observer } from "mobx-react";
 
 /**
@@ -26,7 +27,6 @@ class UserListScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={[styles.header, styles.headerText]}>User list:</Text>
         <GenericList
           data={this.props.userStore.filteredUserList}
           onPress={this.onPressUserRow}
@@ -40,13 +40,14 @@ class UserListScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.cream
+    backgroundColor: colors.darkestBlue
   },
   header: {
     margin: 10
   },
   headerText: {
-    fontSize: 20
+    color: colors.lightBlue,
+    fontSize: fontSize.large
   }
 });
 

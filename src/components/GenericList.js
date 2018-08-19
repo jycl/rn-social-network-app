@@ -57,13 +57,13 @@ class GenericList extends Component {
 
 const styles = StyleSheet.create({
   separator: {
-    backgroundColor: colors.darkBlue,
+    backgroundColor: colors.blue,
     height: 2,
     width: "100%"
   },
   listItemContainer: {
     padding: 10,
-    backgroundColor: colors.blue
+    backgroundColor: "transparent"
   },
   listItemText: {
     color: colors.cream,
