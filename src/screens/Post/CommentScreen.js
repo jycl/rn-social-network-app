@@ -3,6 +3,8 @@ import { View, Text, StyleSheet } from "react-native";
 import colors from "../../styles/colors";
 import { inject, observer } from "mobx-react";
 import GenericList from "../../components/GenericList";
+import PostListItem from "../../components/PostListItem";
+import CommentItem from "../../components/CommentItem";
 
 /**
  * PostCommentScreen is a screen that renders the selected post
@@ -17,10 +19,7 @@ class PostCommentScreen extends Component {
     const { currentPostCommentsList, currentPost } = this.props.postStore;
     return (
       <View style={styles.container}>
-        <View style={styles.container}>
-          <Text>{currentPost.title}</Text>
-          <Text>{currentPost.body}</Text>
-        </View>
+        <PostListItem title={currentPost.title} body={currentPost.body} />
         <View style={styles.commentsContainer}>
           <GenericList
             data={currentPostCommentsList}
@@ -33,24 +32,22 @@ class PostCommentScreen extends Component {
   }
 
   renderComment = item => {
-    return (
-      <View>
-        <Text>{item.name}</Text>
-        <Text>{item.body}</Text>
-        <Text>{item.email}</Text>
-      </View>
-    );
+    const { name, body, email } = item;
+    return <CommentItem title={name} body={body} author={email} />;
   };
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.cream
+    backgroundColor: colors.darkBlue
   },
   commentsContainer: {
-    flex: 4,
-    backgroundColor: colors.darkBlue
+    flex: 1,
+    backgroundColor: colors.darkBlue,
+    borderTopWidth: 1,
+    borderTopColor: colors.cream,
+    padding: 5
   }
 });
 
