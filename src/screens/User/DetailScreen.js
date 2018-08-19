@@ -7,6 +7,7 @@ import Constants from "../../config/constants";
 import GenericList from "../../components/GenericList";
 import PostListItem from "../../components/PostListItem";
 import AlbumListItem from "../../components/AlbumListItem";
+import TodoListItem from "../../components/TodoListItem";
 
 /**
  * UserDetailScreen is a screen that renders two main UI components.
@@ -16,7 +17,7 @@ import AlbumListItem from "../../components/AlbumListItem";
  *
  * @author Joshua Leung <joshuaycleung@gmail.com>
  */
-@inject("userStore", "postStore", "photoStore")
+@inject("userStore", "postStore", "photoStore", "todoStore")
 @observer
 class UserDetailScreen extends Component {
   componentDidMount() {
@@ -95,7 +96,15 @@ class UserDetailScreen extends Component {
           />
         );
       case Constants.TAB_OPTION.TODOS:
-        return <View />;
+        return (
+          <GenericList
+            data={this.props.todoStore.todoList}
+            renderRowItem={item => (
+              <TodoListItem completed={item.completed} title={item.title} />
+            )}
+            onPressDisabled={true}
+          />
+        );
       default:
         return <View />;
     }
@@ -105,6 +114,10 @@ class UserDetailScreen extends Component {
     this.props.postStore.setCurrentPost(post);
     this.props.postStore.loadPostComments(post.id);
     this.props.navigation.navigate("PostComment");
+  };
+
+  onPressPhotoAlbum = album => {
+    //TODO navigate and load all photos
   };
 }
 

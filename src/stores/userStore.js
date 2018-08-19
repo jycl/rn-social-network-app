@@ -3,6 +3,7 @@ import { getUserList } from "../services/APIService";
 import Constants from "../config/constants";
 import postStore from "./postStore";
 import photoStore from "./photoStore";
+import todoStore from "./todoStore";
 
 /**
  * UserStore is an MobX store that manages the state values
@@ -62,6 +63,7 @@ class UserStore {
         photoStore.loadAlbums(this.selectedUser.id);
         break;
       case Constants.TAB_OPTION.TODOS:
+        todoStore.loadTodoList(this.selectedUser.id);
         break;
       default:
         break;
