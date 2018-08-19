@@ -59,3 +59,13 @@ export async function get(url) {
 export async function getUserList() {
   return await get(APIConfig.USERS);
 }
+
+/**
+ * Get full post history list for user with input userId
+ * @param {String} userId used to query posts with this userId
+ * @return {Array<Objects>} each object represents a post
+ */
+export async function getPostHistoryForUser(userId) {
+  const url = APIConfig.POSTS + `?userId=${userId}`;
+  return await get(url);
+}
