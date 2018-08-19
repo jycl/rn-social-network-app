@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TodoStore tests  Snapshot test of TodoStore 1`] = `TodoStore {}`;
