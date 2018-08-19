@@ -11,25 +11,25 @@ import colors from "../styles/colors";
 import fontSize from "../styles/fontSize";
 
 /**
- * UserList component renders a FlatList with data from the userList props.
+ * GenericList component renders a FlatList with data from the userList props.
  * The list displays users' names retrieved from the backend and allows the
  * app user to press the list item to navigate to get more details (via onPress props).
  *
  * Props:
- * @property {array} userList array of objects that each represent a user and their details/props
- * @property {func} onPress callback method invoked when item row for user is pressed
+ * @property {array} data array of objects that each represent each row to display their props
+ * @property {func} onPress callback method invoked when item row is pressed
+ * @property {func} renderRowItem render method that returns a custom JSX component for each list row
  *
  * @author Joshua Leung <joshuaycleung@gmail.com>
  */
-class UserList extends Component {
+class GenericList extends Component {
   render() {
     return (
       <FlatList
-        ref="userList"
         keyExtractor={this._keyExtractor}
         renderItem={this._renderUserRow}
         ItemSeparatorComponent={this._renderSeparator}
-        data={this.props.userList}
+        data={this.props.data}
       />
     );
   }
@@ -43,7 +43,7 @@ class UserList extends Component {
         onPress={() => this.props.onPress(item)}
         style={styles.listItemContainer}
       >
-        <Text style={styles.listItemText}>{item.name}</Text>
+        {this.props.renderRowItem(item)}
       </TouchableOpacity>
     );
   };
@@ -76,14 +76,16 @@ const styles = StyleSheet.create({
   }
 });
 
-UserList.propTypes = {
-  userList: PropTypes.array,
-  onPress: PropTypes.func
+GenericList.propTypes = {
+  data: PropTypes.array,
+  onPress: PropTypes.func,
+  renderRowItem: PropTypes.func
 };
 
-UserList.defaultProps = {
-  userList: [],
-  onPress: () => {}
+GenericList.defaultProps = {
+  data: [],
+  onPress: () => {},
+  renderRowItem: () => <View />
 };
 
-export default UserList;
+export default GenericList;
