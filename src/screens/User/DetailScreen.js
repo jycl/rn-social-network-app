@@ -117,7 +117,9 @@ class UserDetailScreen extends Component {
   };
 
   onPressPhotoAlbum = album => {
-    //TODO navigate and load all photos
+    this.props.photoStore.setCurrentAlbum(album);
+    this.props.photoStore.loadPhotoForAlbumId(album.id);
+    this.props.navigation.navigate("PhotoGrid");
   };
 }
 
