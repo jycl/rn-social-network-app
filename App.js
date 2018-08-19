@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { createStackNavigator } from "react-navigation";
+import { createStackNavigator, HeaderBackButton } from "react-navigation";
 import UserListScreen from "./src/screens/User/ListScreen";
 import UserDetailScreen from "./src/screens/User/DetailScreen";
 import HomeScreen from "./src/screens/HomeScreen";
@@ -29,7 +29,16 @@ const AppNavigator = createStackNavigator(
     },
     UserDetail: {
       screen: UserDetailScreen,
-      navigationOptions: navStyleRenderer
+      navigationOptions: ({ navigation }) => ({
+        title: `${userStore.selectedUser.name}`,
+        headerLeft: () => {
+          let goBack = () => {
+            userStore.resetSelection();
+            navigation.goBack();
+          };
+          return <HeaderBackButton onPress={() => goBack()} />;
+        }
+      })
     },
     PostComment: {
       screen: PostCommentScreen,
