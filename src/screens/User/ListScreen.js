@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import UserList from "../../components/UserList";
+import GenericList from "../../components/GenericList";
+import UserListItem from "../../components/UserListItem";
 import colors from "../../styles/colors";
 import { inject, observer } from "mobx-react";
 
@@ -26,9 +27,10 @@ class UserListScreen extends Component {
     return (
       <View style={styles.container}>
         <Text style={[styles.header, styles.headerText]}>User list:</Text>
-        <UserList
-          userList={this.props.userStore.filteredUserList}
+        <GenericList
+          data={this.props.userStore.filteredUserList}
           onPress={this.onPressUserRow}
+          renderRowItem={item => <UserListItem item={item} />}
         />
       </View>
     );
