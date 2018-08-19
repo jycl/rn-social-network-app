@@ -33,9 +33,11 @@ describe("UserContainer tests ", () => {
     const user = {
       name: "Larry David",
       email: "larry.d@avid.com",
-      suite: "16",
-      street: "Fiver Road",
-      city: "Hong Kong",
+      address: {
+        suite: "16",
+        street: "Fiver Road",
+        city: "Hong Kong"
+      },
       company: {
         name: "Hawkins Lab",
         catchPhrase: "They won't be able to resist these pearls."

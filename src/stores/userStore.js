@@ -42,15 +42,8 @@ class UserStore {
    */
   @computed
   get selectedUserDetails() {
-    const {
-      city,
-      street,
-      suite,
-      company,
-      email,
-      name,
-      phone
-    } = this.selectedUser;
+    const { address, company, email, name, phone } = this.selectedUser;
+    const { city, street, suite } = address;
     return {
       name,
       email,
