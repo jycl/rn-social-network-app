@@ -3,17 +3,28 @@ import { Text, View, StyleSheet } from "react-native";
 import colors from "../styles/colors";
 import fontSize from "../styles/fontSize";
 import PropTypes from "prop-types";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 class TodoListItem extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.listItemText}>{this.props.title}</Text>
         {this.props.completed ? (
-          <Text style={styles.listItemSymbol}>[✓]</Text>
+          <Icon
+            style={styles.listItemSymbol}
+            name={"check-box"}
+            color={colors.lightestBlue}
+            size={fontSize.large}
+          />
         ) : (
-          <Text style={styles.listItemSymbol}>{`[    ]`}</Text>
+          <Icon
+            style={styles.listItemSymbol}
+            name={"check-box-outline-blank"}
+            color={colors.lightestBlue}
+            size={fontSize.large}
+          />
         )}
+        <Text style={styles.listItemText}>{this.props.title}</Text>
       </View>
     );
   }
@@ -38,9 +49,7 @@ const styles = StyleSheet.create({
     fontSize: fontSize.medium
   },
   listItemSymbol: {
-    color: colors.cream,
-    paddingVertical: 10,
-    fontSize: fontSize.medium
+    paddingRight: 12
   }
 });
 
