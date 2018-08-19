@@ -79,6 +79,7 @@ class UserDetailScreen extends Component {
         return (
           <GenericList
             data={this.props.postStore.postList}
+            onPress={this.onPressPostItem}
             renderRowItem={item => <PostListItem item={item} />}
           />
         );
@@ -90,6 +91,12 @@ class UserDetailScreen extends Component {
         return <View />;
     }
   }
+
+  onPressPostItem = post => {
+    this.props.postStore.setCurrentPost(post);
+    this.props.postStore.loadPostComments(post.id);
+    this.props.navigation.navigate("PostComment");
+  };
 }
 
 const styles = StyleSheet.create({
