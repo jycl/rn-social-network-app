@@ -8,7 +8,7 @@ class AlbumListItem extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.listItemText}>{this.props.item.title}</Text>
+        <Text style={styles.listItemText}>{this.props.title}</Text>
       </View>
     );
   }

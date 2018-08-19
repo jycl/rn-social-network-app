@@ -81,7 +81,9 @@ class UserDetailScreen extends Component {
           <GenericList
             data={this.props.postStore.postList}
             onPress={this.onPressPostItem}
-            renderRowItem={item => <PostListItem item={item} />}
+            renderRowItem={item => (
+              <PostListItem title={item.title} body={item.body} />
+            )}
           />
         );
       case Constants.TAB_OPTION.ALBUMS:
@@ -89,7 +91,7 @@ class UserDetailScreen extends Component {
           <GenericList
             data={this.props.photoStore.albumList}
             onPress={this.onPressPhotoAlbum}
-            renderRowItem={item => <AlbumListItem item={item} />}
+            renderRowItem={item => <AlbumListItem title={item.title} />}
           />
         );
       case Constants.TAB_OPTION.TODOS:
