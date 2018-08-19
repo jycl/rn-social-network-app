@@ -2,6 +2,7 @@ import { observable, computed, toJS, action } from "mobx";
 import { getUserList } from "../services/APIService";
 import Constants from "../config/constants";
 import postStore from "./postStore";
+import photoStore from "./photoStore";
 
 /**
  * UserStore is an MobX store that manages the state values
@@ -58,6 +59,7 @@ class UserStore {
         postStore.loadPostHistory(this.selectedUser.id);
         break;
       case Constants.TAB_OPTION.ALBUMS:
+        photoStore.loadAlbums(this.selectedUser.id);
         break;
       case Constants.TAB_OPTION.TODOS:
         break;

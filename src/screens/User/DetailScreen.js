@@ -6,6 +6,7 @@ import Tab from "../../components/Tab";
 import Constants from "../../config/constants";
 import GenericList from "../../components/GenericList";
 import PostListItem from "../../components/PostListItem";
+import AlbumListItem from "../../components/AlbumListItem";
 
 /**
  * UserDetailScreen is a screen that renders two main UI components.
@@ -15,7 +16,7 @@ import PostListItem from "../../components/PostListItem";
  *
  * @author Joshua Leung <joshuaycleung@gmail.com>
  */
-@inject("userStore", "postStore")
+@inject("userStore", "postStore", "photoStore")
 @observer
 class UserDetailScreen extends Component {
   componentDidMount() {
@@ -84,7 +85,13 @@ class UserDetailScreen extends Component {
           />
         );
       case Constants.TAB_OPTION.ALBUMS:
-        return <View />;
+        return (
+          <GenericList
+            data={this.props.photoStore.albumList}
+            onPress={this.onPressPhotoAlbum}
+            renderRowItem={item => <AlbumListItem item={item} />}
+          />
+        );
       case Constants.TAB_OPTION.TODOS:
         return <View />;
       default:
