@@ -9,7 +9,7 @@ class UserListItem extends Component {
     return (
       <View style={styles.container}>
         <Icon name="person" color={colors.lightBlue} size={30} />
-        <Text style={styles.listItemText}>{this.props.item.name}</Text>
+        <Text style={styles.listItemText}>{this.props.name}</Text>
         <Icon name="keyboard-arrow-right" color={colors.lightBlue} size={30} />
       </View>
     );

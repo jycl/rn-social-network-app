@@ -30,7 +30,7 @@ class UserListScreen extends Component {
         <GenericList
           data={this.props.userStore.filteredUserList}
           onPress={this.onPressUserRow}
-          renderRowItem={item => <UserListItem item={item} />}
+          renderRowItem={item => <UserListItem name={item.name} />}
         />
       </View>
     );

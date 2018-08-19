@@ -1,0 +1,1470 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`List Item Testing AlbumListItem renders correctly 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <AlbumListItem
+    title="title"
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <Component
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "transparent",
+              "flex": 1,
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+            }
+          }
+        >
+          <Icon
+            allowFontScaling={false}
+            color="#F7F7F2"
+            name="photo-album"
+            size={30}
+          />
+          <Component
+            style={
+              Object {
+                "color": "#F7F7F2",
+                "flex": 1,
+                "fontSize": 18,
+                "padding": 10,
+              }
+            }
+          >
+            title
+          </Component>
+        </Component>,
+        <Component
+          style={
+            Object {
+              "alignItems": "flex-end",
+              "width": "100%",
+            }
+          }
+        >
+          <TouchableOpacity
+            activeOpacity={0.2}
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+              }
+            }
+          >
+            <Component
+              style={
+                Object {
+                  "color": "#0CAADC",
+                  "fontSize": 16,
+                }
+              }
+            >
+              See photos (undefined) 
+            </Component>
+            <Icon
+              allowFontScaling={false}
+              color="#0CAADC"
+              largelarge={true}
+              name="photo-library"
+              size={22}
+            />
+          </TouchableOpacity>
+          <Component
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "flex": 1,
+                "flexDirection": "row",
+                "justifyContent": "flex-start",
+              }
+            }
+          />
+        </Component>,
+      ],
+      "style": Object {
+        "alignItems": "flex-start",
+        "backgroundColor": "transparent",
+        "flex": 1,
+      },
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <Icon
+              allowFontScaling={false}
+              color="#F7F7F2"
+              name="photo-album"
+              size={30}
+            />,
+            <Component
+              style={
+                Object {
+                  "color": "#F7F7F2",
+                  "flex": 1,
+                  "fontSize": 18,
+                  "padding": 10,
+                }
+              }
+            >
+              title
+            </Component>,
+          ],
+          "style": Object {
+            "alignItems": "center",
+            "backgroundColor": "transparent",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+          },
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "allowFontScaling": false,
+              "color": "#F7F7F2",
+              "name": "photo-album",
+              "size": 30,
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "children": "title",
+              "style": Object {
+                "color": "#F7F7F2",
+                "flex": 1,
+                "fontSize": 18,
+                "padding": 10,
+              },
+            },
+            "ref": null,
+            "rendered": "title",
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            <TouchableOpacity
+              activeOpacity={0.2}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                }
+              }
+            >
+              <Component
+                style={
+                  Object {
+                    "color": "#0CAADC",
+                    "fontSize": 16,
+                  }
+                }
+              >
+                See photos (undefined) 
+              </Component>
+              <Icon
+                allowFontScaling={false}
+                color="#0CAADC"
+                largelarge={true}
+                name="photo-library"
+                size={22}
+              />
+            </TouchableOpacity>,
+            <Component
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "transparent",
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "justifyContent": "flex-start",
+                }
+              }
+            />,
+          ],
+          "style": Object {
+            "alignItems": "flex-end",
+            "width": "100%",
+          },
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "activeOpacity": 0.2,
+              "children": Array [
+                <Component
+                  style={
+                    Object {
+                      "color": "#0CAADC",
+                      "fontSize": 16,
+                    }
+                  }
+                >
+                  See photos (undefined) 
+                </Component>,
+                <Icon
+                  allowFontScaling={false}
+                  color="#0CAADC"
+                  largelarge={true}
+                  name="photo-library"
+                  size={22}
+                />,
+              ],
+              "onPress": undefined,
+              "style": Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+              },
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "children": "See photos (undefined) ",
+                  "style": Object {
+                    "color": "#0CAADC",
+                    "fontSize": 16,
+                  },
+                },
+                "ref": null,
+                "rendered": "See photos (undefined) ",
+                "type": [Function],
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "class",
+                "props": Object {
+                  "allowFontScaling": false,
+                  "color": "#0CAADC",
+                  "largelarge": true,
+                  "name": "photo-library",
+                  "size": 22,
+                },
+                "ref": null,
+                "rendered": null,
+                "type": [Function],
+              },
+            ],
+            "type": [Function],
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "class",
+            "props": Object {
+              "style": Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "flex": 1,
+                "flexDirection": "row",
+                "justifyContent": "flex-start",
+              },
+            },
+            "ref": null,
+            "rendered": null,
+            "type": [Function],
+          },
+        ],
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <Component
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+                "flex": 1,
+                "flexDirection": "row",
+                "justifyContent": "flex-start",
+              }
+            }
+          >
+            <Icon
+              allowFontScaling={false}
+              color="#F7F7F2"
+              name="photo-album"
+              size={30}
+            />
+            <Component
+              style={
+                Object {
+                  "color": "#F7F7F2",
+                  "flex": 1,
+                  "fontSize": 18,
+                  "padding": 10,
+                }
+              }
+            >
+              title
+            </Component>
+          </Component>,
+          <Component
+            style={
+              Object {
+                "alignItems": "flex-end",
+                "width": "100%",
+              }
+            }
+          >
+            <TouchableOpacity
+              activeOpacity={0.2}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                }
+              }
+            >
+              <Component
+                style={
+                  Object {
+                    "color": "#0CAADC",
+                    "fontSize": 16,
+                  }
+                }
+              >
+                See photos (undefined) 
+              </Component>
+              <Icon
+                allowFontScaling={false}
+                color="#0CAADC"
+                largelarge={true}
+                name="photo-library"
+                size={22}
+              />
+            </TouchableOpacity>
+            <Component
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "transparent",
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "justifyContent": "flex-start",
+                }
+              }
+            />
+          </Component>,
+        ],
+        "style": Object {
+          "alignItems": "flex-start",
+          "backgroundColor": "transparent",
+          "flex": 1,
+        },
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <Icon
+                allowFontScaling={false}
+                color="#F7F7F2"
+                name="photo-album"
+                size={30}
+              />,
+              <Component
+                style={
+                  Object {
+                    "color": "#F7F7F2",
+                    "flex": 1,
+                    "fontSize": 18,
+                    "padding": 10,
+                  }
+                }
+              >
+                title
+              </Component>,
+            ],
+            "style": Object {
+              "alignItems": "center",
+              "backgroundColor": "transparent",
+              "flex": 1,
+              "flexDirection": "row",
+              "justifyContent": "flex-start",
+            },
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "allowFontScaling": false,
+                "color": "#F7F7F2",
+                "name": "photo-album",
+                "size": 30,
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "children": "title",
+                "style": Object {
+                  "color": "#F7F7F2",
+                  "flex": 1,
+                  "fontSize": 18,
+                  "padding": 10,
+                },
+              },
+              "ref": null,
+              "rendered": "title",
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              <TouchableOpacity
+                activeOpacity={0.2}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                  }
+                }
+              >
+                <Component
+                  style={
+                    Object {
+                      "color": "#0CAADC",
+                      "fontSize": 16,
+                    }
+                  }
+                >
+                  See photos (undefined) 
+                </Component>
+                <Icon
+                  allowFontScaling={false}
+                  color="#0CAADC"
+                  largelarge={true}
+                  name="photo-library"
+                  size={22}
+                />
+              </TouchableOpacity>,
+              <Component
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "transparent",
+                    "flex": 1,
+                    "flexDirection": "row",
+                    "justifyContent": "flex-start",
+                  }
+                }
+              />,
+            ],
+            "style": Object {
+              "alignItems": "flex-end",
+              "width": "100%",
+            },
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "activeOpacity": 0.2,
+                "children": Array [
+                  <Component
+                    style={
+                      Object {
+                        "color": "#0CAADC",
+                        "fontSize": 16,
+                      }
+                    }
+                  >
+                    See photos (undefined) 
+                  </Component>,
+                  <Icon
+                    allowFontScaling={false}
+                    color="#0CAADC"
+                    largelarge={true}
+                    name="photo-library"
+                    size={22}
+                  />,
+                ],
+                "onPress": undefined,
+                "style": Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                },
+              },
+              "ref": null,
+              "rendered": Array [
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "children": "See photos (undefined) ",
+                    "style": Object {
+                      "color": "#0CAADC",
+                      "fontSize": 16,
+                    },
+                  },
+                  "ref": null,
+                  "rendered": "See photos (undefined) ",
+                  "type": [Function],
+                },
+                Object {
+                  "instance": null,
+                  "key": undefined,
+                  "nodeType": "class",
+                  "props": Object {
+                    "allowFontScaling": false,
+                    "color": "#0CAADC",
+                    "largelarge": true,
+                    "name": "photo-library",
+                    "size": 22,
+                  },
+                  "ref": null,
+                  "rendered": null,
+                  "type": [Function],
+                },
+              ],
+              "type": [Function],
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "class",
+              "props": Object {
+                "style": Object {
+                  "alignItems": "center",
+                  "backgroundColor": "transparent",
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "justifyContent": "flex-start",
+                },
+              },
+              "ref": null,
+              "rendered": null,
+              "type": [Function],
+            },
+          ],
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getSnapshotBeforeUpdate": true,
+        },
+      },
+    },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
+  },
+}
+`;
+
+exports[`List Item Testing CommentItem renders correctly 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <CommentItem
+    author="John Doe"
+    body="body"
+    title="title"
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <Component
+          style={
+            Object {
+              "color": "#F7F7F2",
+              "fontSize": 16,
+              "padding": 10,
+            }
+          }
+        >
+          title
+        </Component>,
+        <Component
+          style={
+            Object {
+              "color": "#F7F7F2",
+              "fontSize": 14,
+              "padding": 10,
+            }
+          }
+        >
+          body
+        </Component>,
+        <Component
+          style={
+            Object {
+              "alignSelf": "flex-end",
+              "color": "#F7F7F2",
+              "flex": 1,
+              "fontSize": 14,
+              "padding": 10,
+            }
+          }
+        >
+          Posted by: 
+          John Doe
+        </Component>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": "title",
+          "style": Object {
+            "color": "#F7F7F2",
+            "fontSize": 16,
+            "padding": 10,
+          },
+        },
+        "ref": null,
+        "rendered": "title",
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": "body",
+          "style": Object {
+            "color": "#F7F7F2",
+            "fontSize": 14,
+            "padding": 10,
+          },
+        },
+        "ref": null,
+        "rendered": "body",
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": Array [
+            "Posted by: ",
+            "John Doe",
+          ],
+          "style": Object {
+            "alignSelf": "flex-end",
+            "color": "#F7F7F2",
+            "flex": 1,
+            "fontSize": 14,
+            "padding": 10,
+          },
+        },
+        "ref": null,
+        "rendered": Array [
+          "Posted by: ",
+          "John Doe",
+        ],
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <Component
+            style={
+              Object {
+                "color": "#F7F7F2",
+                "fontSize": 16,
+                "padding": 10,
+              }
+            }
+          >
+            title
+          </Component>,
+          <Component
+            style={
+              Object {
+                "color": "#F7F7F2",
+                "fontSize": 14,
+                "padding": 10,
+              }
+            }
+          >
+            body
+          </Component>,
+          <Component
+            style={
+              Object {
+                "alignSelf": "flex-end",
+                "color": "#F7F7F2",
+                "flex": 1,
+                "fontSize": 14,
+                "padding": 10,
+              }
+            }
+          >
+            Posted by: 
+            John Doe
+          </Component>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": "title",
+            "style": Object {
+              "color": "#F7F7F2",
+              "fontSize": 16,
+              "padding": 10,
+            },
+          },
+          "ref": null,
+          "rendered": "title",
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": "body",
+            "style": Object {
+              "color": "#F7F7F2",
+              "fontSize": 14,
+              "padding": 10,
+            },
+          },
+          "ref": null,
+          "rendered": "body",
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": Array [
+              "Posted by: ",
+              "John Doe",
+            ],
+            "style": Object {
+              "alignSelf": "flex-end",
+              "color": "#F7F7F2",
+              "flex": 1,
+              "fontSize": 14,
+              "padding": 10,
+            },
+          },
+          "ref": null,
+          "rendered": Array [
+            "Posted by: ",
+            "John Doe",
+          ],
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getSnapshotBeforeUpdate": true,
+        },
+      },
+    },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
+  },
+}
+`;
+
+exports[`List Item Testing PostListItem renders correctly 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <PostListItem
+    body="body"
+    title="title"
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <Component
+          style={
+            Object {
+              "color": "#F7F7F2",
+              "fontSize": 18,
+              "fontWeight": "bold",
+              "padding": 10,
+            }
+          }
+        >
+          title
+        </Component>,
+        <Component
+          style={
+            Object {
+              "color": "#F7F7F2",
+              "fontSize": 16,
+              "padding": 10,
+            }
+          }
+        >
+          body
+        </Component>,
+        undefined,
+      ],
+      "style": Object {
+        "alignItems": "flex-start",
+        "backgroundColor": "transparent",
+        "justifyContent": "flex-start",
+      },
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": "title",
+          "style": Object {
+            "color": "#F7F7F2",
+            "fontSize": 18,
+            "fontWeight": "bold",
+            "padding": 10,
+          },
+        },
+        "ref": null,
+        "rendered": "title",
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": "body",
+          "style": Object {
+            "color": "#F7F7F2",
+            "fontSize": 16,
+            "padding": 10,
+          },
+        },
+        "ref": null,
+        "rendered": "body",
+        "type": [Function],
+      },
+      undefined,
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <Component
+            style={
+              Object {
+                "color": "#F7F7F2",
+                "fontSize": 18,
+                "fontWeight": "bold",
+                "padding": 10,
+              }
+            }
+          >
+            title
+          </Component>,
+          <Component
+            style={
+              Object {
+                "color": "#F7F7F2",
+                "fontSize": 16,
+                "padding": 10,
+              }
+            }
+          >
+            body
+          </Component>,
+          undefined,
+        ],
+        "style": Object {
+          "alignItems": "flex-start",
+          "backgroundColor": "transparent",
+          "justifyContent": "flex-start",
+        },
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": "title",
+            "style": Object {
+              "color": "#F7F7F2",
+              "fontSize": 18,
+              "fontWeight": "bold",
+              "padding": 10,
+            },
+          },
+          "ref": null,
+          "rendered": "title",
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": "body",
+            "style": Object {
+              "color": "#F7F7F2",
+              "fontSize": 16,
+              "padding": 10,
+            },
+          },
+          "ref": null,
+          "rendered": "body",
+          "type": [Function],
+        },
+        undefined,
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getSnapshotBeforeUpdate": true,
+        },
+      },
+    },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
+  },
+}
+`;
+
+exports[`List Item Testing TodoListItem renders correctly 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <TodoListItem
+    completed={false}
+    title="title"
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <Icon
+          allowFontScaling={false}
+          color="#11B5E4"
+          name="check-box-outline-blank"
+          size={22}
+          style={
+            Object {
+              "paddingRight": 12,
+            }
+          }
+        />,
+        <Component
+          style={
+            Object {
+              "color": "#F7F7F2",
+              "flex": 1,
+              "fontSize": 18,
+              "paddingVertical": 10,
+            }
+          }
+        >
+          title
+        </Component>,
+      ],
+      "style": Object {
+        "alignItems": "center",
+        "backgroundColor": "transparent",
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      },
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "allowFontScaling": false,
+          "color": "#11B5E4",
+          "name": "check-box-outline-blank",
+          "size": 22,
+          "style": Object {
+            "paddingRight": 12,
+          },
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": "title",
+          "style": Object {
+            "color": "#F7F7F2",
+            "flex": 1,
+            "fontSize": 18,
+            "paddingVertical": 10,
+          },
+        },
+        "ref": null,
+        "rendered": "title",
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <Icon
+            allowFontScaling={false}
+            color="#11B5E4"
+            name="check-box-outline-blank"
+            size={22}
+            style={
+              Object {
+                "paddingRight": 12,
+              }
+            }
+          />,
+          <Component
+            style={
+              Object {
+                "color": "#F7F7F2",
+                "flex": 1,
+                "fontSize": 18,
+                "paddingVertical": 10,
+              }
+            }
+          >
+            title
+          </Component>,
+        ],
+        "style": Object {
+          "alignItems": "center",
+          "backgroundColor": "transparent",
+          "flex": 1,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+        },
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "allowFontScaling": false,
+            "color": "#11B5E4",
+            "name": "check-box-outline-blank",
+            "size": 22,
+            "style": Object {
+              "paddingRight": 12,
+            },
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": "title",
+            "style": Object {
+              "color": "#F7F7F2",
+              "flex": 1,
+              "fontSize": 18,
+              "paddingVertical": 10,
+            },
+          },
+          "ref": null,
+          "rendered": "title",
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getSnapshotBeforeUpdate": true,
+        },
+      },
+    },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
+  },
+}
+`;
+
+exports[`List Item Testing UserListItem renders correctly 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <UserListItem
+    name=""
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <Icon
+          allowFontScaling={false}
+          color="#0CAADC"
+          name="person"
+          size={30}
+        />,
+        <Component
+          style={
+            Object {
+              "color": "#0CAADC",
+              "flex": 1,
+              "fontSize": 18,
+              "paddingLeft": 10,
+              "paddingVertical": 10,
+            }
+          }
+        >
+          
+        </Component>,
+        <Icon
+          allowFontScaling={false}
+          color="#0CAADC"
+          name="keyboard-arrow-right"
+          size={30}
+        />,
+      ],
+      "style": Object {
+        "alignItems": "center",
+        "backgroundColor": "transparent",
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+      },
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "allowFontScaling": false,
+          "color": "#0CAADC",
+          "name": "person",
+          "size": 30,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": "",
+          "style": Object {
+            "color": "#0CAADC",
+            "flex": 1,
+            "fontSize": 18,
+            "paddingLeft": 10,
+            "paddingVertical": 10,
+          },
+        },
+        "ref": null,
+        "rendered": "",
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "allowFontScaling": false,
+          "color": "#0CAADC",
+          "name": "keyboard-arrow-right",
+          "size": 30,
+        },
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <Icon
+            allowFontScaling={false}
+            color="#0CAADC"
+            name="person"
+            size={30}
+          />,
+          <Component
+            style={
+              Object {
+                "color": "#0CAADC",
+                "flex": 1,
+                "fontSize": 18,
+                "paddingLeft": 10,
+                "paddingVertical": 10,
+              }
+            }
+          >
+            
+          </Component>,
+          <Icon
+            allowFontScaling={false}
+            color="#0CAADC"
+            name="keyboard-arrow-right"
+            size={30}
+          />,
+        ],
+        "style": Object {
+          "alignItems": "center",
+          "backgroundColor": "transparent",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+        },
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "allowFontScaling": false,
+            "color": "#0CAADC",
+            "name": "person",
+            "size": 30,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": "",
+            "style": Object {
+              "color": "#0CAADC",
+              "flex": 1,
+              "fontSize": 18,
+              "paddingLeft": 10,
+              "paddingVertical": 10,
+            },
+          },
+          "ref": null,
+          "rendered": "",
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "allowFontScaling": false,
+            "color": "#0CAADC",
+            "name": "keyboard-arrow-right",
+            "size": 30,
+          },
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getSnapshotBeforeUpdate": true,
+        },
+      },
+    },
+    "attachTo": undefined,
+    "hydrateIn": undefined,
+  },
+}
+`;
