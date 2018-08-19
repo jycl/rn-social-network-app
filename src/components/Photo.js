@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Image, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
+import Icon from "react-native-vector-icons/MaterialIcons";
+import colors from "../styles/colors";
 
 /**
  * Photo component renders an Image.
@@ -19,11 +21,20 @@ class Photo extends Component {
         onPress={() => this.props.onPress(item)}
         style={styles.listItemContainer}
       >
-        <Image
-          style={{ width: 100, height: 100 }}
-          source={{ uri: this.props.url }}
-        />
+        <Image style={styles.photoContainer} source={{ uri: this.props.url }} />
+        {this.renderPlaceholder()}
       </TouchableOpacity>
+    );
+  }
+
+  /**
+   * Render loading icon when image has not fully loaded from URL.
+   */
+  renderPlaceholder() {
+    return (
+      <View zIndex={-1} style={[styles.placeholder, styles.photoContainer]}>
+        <Icon name="data-usage" color={colors.lightBlue} size={30} />
+      </View>
     );
   }
 }
@@ -33,6 +44,18 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     backgroundColor: "transparent"
+  },
+  photoContainer: {
+    width: 100,
+    height: 100
+  },
+  placeholder: {
+    flex: 1,
+    left: 10,
+    top: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute"
   }
 });
 
