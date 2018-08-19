@@ -22,7 +22,7 @@ class GenericList extends Component {
     return (
       <FlatList
         keyExtractor={this._keyExtractor}
-        renderItem={this._renderUserRow}
+        renderItem={this._renderRow}
         ItemSeparatorComponent={this._renderSeparator}
         data={this.props.data}
       />
@@ -32,7 +32,7 @@ class GenericList extends Component {
   /**
    * Render each list item as button passing row item into props.onPress
    */
-  _renderUserRow = ({ item, index }) => {
+  _renderRow = ({ item, index }) => {
     return (
       <TouchableOpacity
         disabled={this.props.onPressDisabled}
