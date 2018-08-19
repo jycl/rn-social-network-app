@@ -1,4 +1,9 @@
-import { get, getUserList, getPostHistoryForUser } from "../APIService";
+import {
+  get,
+  getUserList,
+  getPostHistoryForUser,
+  APIConfig
+} from "../APIService";
 
 describe("API service testing", () => {
   beforeEach(() => {
@@ -79,6 +84,11 @@ describe("API service testing", () => {
       });
     });
     const postList = await getPostHistoryForUser("1");
+    const url = APIConfig.POSTS + `?userId=1`;
+    expect(global.fetch).toHaveBeenCalledWith(url, {
+      method: "GET",
+      headers: { "Content-Type": "application/json; charset=utf-8" }
+    });
     expect(global.fetch).toHaveBeenCalledTimes(1);
     expect(postList).toMatchObject(postHistory);
   });

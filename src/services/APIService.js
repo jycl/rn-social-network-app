@@ -9,8 +9,8 @@
  * For test files see ./__tests__/APIService.test.js.
  */
 
-const APIConfig = {
-  POSTS: "https://jsonplaceholder.typicode.com/todos/",
+export const APIConfig = {
+  POSTS: "https://jsonplaceholder.typicode.com/posts/",
   COMMENTS: "https://jsonplaceholder.typicode.com/comments/",
   ALBUMS: "https://jsonplaceholder.typicode.com/albums/",
   PHOTOS: "https://jsonplaceholder.typicode.com/photos/",
