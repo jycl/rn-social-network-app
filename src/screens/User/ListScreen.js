@@ -17,11 +17,19 @@ class UserListScreen extends Component {
     this.props.userStore.loadUserList();
   }
 
+  onPressUserRow = user => {
+    this.props.userStore.selectUser(user);
+    this.props.navigation.navigate("UserDetail");
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={[styles.header, styles.headerText]}>User list:</Text>
-        <UserList userList={this.props.userStore.filteredUserList} />
+        <UserList
+          userList={this.props.userStore.filteredUserList}
+          onPress={this.onPressUserRow}
+        />
       </View>
     );
   }
