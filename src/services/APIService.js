@@ -69,3 +69,13 @@ export async function getPostHistoryForUser(userId) {
   const url = APIConfig.POSTS + `?userId=${userId}`;
   return await get(url);
 }
+
+/**
+ * Get full post history list for user with input userId
+ * @param {String} userId used to query posts with this userId
+ * @return {Array<Objects>} each object represents a post
+ */
+export async function getCommentsForPost(postId) {
+  const url = APIConfig.COMMENTS + `?postId=${postId}`;
+  return await get(url);
+}

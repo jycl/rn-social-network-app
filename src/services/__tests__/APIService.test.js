@@ -2,6 +2,7 @@ import {
   get,
   getUserList,
   getPostHistoryForUser,
+  getCommentsForPost,
   APIConfig
 } from "../APIService";
 
@@ -91,5 +92,41 @@ describe("API service testing", () => {
     });
     expect(global.fetch).toHaveBeenCalledTimes(1);
     expect(postList).toMatchObject(postHistory);
+  });
+
+  it("Test APIService getCommentsForPost method", async () => {
+    //update mock fetch to return the comment list
+    const testCommentList = [
+      {
+        postId: 1,
+        id: 1,
+        name: "That's great!",
+        body: "Happy for you.",
+        name: "John"
+      },
+      {
+        postId: 1,
+        id: 2,
+        name: "x2!",
+        body: "",
+        name: "Marie"
+      }
+    ];
+    global.fetch.mockImplementationOnce(() => {
+      return Promise.resolve({
+        ok: true,
+        json: () => {
+          return testCommentList;
+        }
+      });
+    });
+    const commentList = await getCommentsForPost("1");
+    const url = APIConfig.COMMENTS + `?postId=1`;
+    expect(global.fetch).toHaveBeenCalledWith(url, {
+      method: "GET",
+      headers: { "Content-Type": "application/json; charset=utf-8" }
+    });
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(commentList).toMatchObject(testCommentList);
   });
 });

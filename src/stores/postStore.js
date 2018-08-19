@@ -1,5 +1,8 @@
 import { observable, computed, toJS, action } from "mobx";
-import { getPostHistoryForUser } from "../services/APIService";
+import {
+  getPostHistoryForUser,
+  getCommentsForPost
+} from "../services/APIService";
 
 /**
  * PostStore is an MobX store that manages the state values
@@ -14,6 +17,11 @@ class PostStore {
   @observable
   rawPostList = [];
 
+  @observable
+  currentPost = null;
+  @observable
+  currentPostComments = [];
+
   /**
    * Retrieve user list from backend and save to store
    */
@@ -24,9 +32,26 @@ class PostStore {
     });
   };
 
+  @action
+  setCurrentPost = post => {
+    this.currentPost = post;
+  };
+
+  @action
+  loadPostComments = postId => {
+    getCommentsForPost(postId).then(comments => {
+      this.currentPostComments = comments;
+    });
+  };
+
   @computed
   get postList() {
     return toJS(this.rawPostList);
+  }
+
+  @computed
+  get currentPostCommentsList() {
+    return toJS(this.currentPostComments);
   }
 }
 const postStore = new PostStore();
