@@ -91,8 +91,14 @@ class UserDetailScreen extends Component {
         return (
           <GenericList
             data={this.props.photoStore.albumList}
-            onPress={this.onPressPhotoAlbum}
-            renderRowItem={item => <AlbumListItem title={item.title} />}
+            onPressDisabled={true}
+            renderRowItem={item => (
+              <AlbumListItem
+                title={item.title}
+                photoCount={item.photoCount}
+                onPress={() => this.onPressPhotoAlbum(item)}
+              />
+            )}
           />
         );
       case Constants.TAB_OPTION.TODOS:
