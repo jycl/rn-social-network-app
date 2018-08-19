@@ -8,6 +8,8 @@ import GenericList from "../../components/GenericList";
 import PostListItem from "../../components/PostListItem";
 import AlbumListItem from "../../components/AlbumListItem";
 import TodoListItem from "../../components/TodoListItem";
+import UserDetailCard from "../../components/UserDetailCard";
+import { getInitialsFromName } from "../../utility/DataFormatHelper";
 
 /**
  * UserDetailScreen is a screen that renders two main UI components.
@@ -27,17 +29,11 @@ class UserDetailScreen extends Component {
 
   render() {
     const { selectedUserDetails, selectedTab } = this.props.userStore;
-    const { name, email, phone, address, company } = selectedUserDetails;
+    const { name } = selectedUserDetails;
+    const initials = getInitialsFromName(name);
     return (
       <View style={styles.container}>
-        <View style={styles.container}>
-          {/* TODO: Extract text values into a <UserDetailCard/> component */}
-          <Text>{name}</Text>
-          <Text>{email}</Text>
-          <Text>{phone}</Text>
-          <Text>{address}</Text>
-          <Text>{company}</Text>
-        </View>
+        <UserDetailCard details={selectedUserDetails} initials={initials} />
         <View style={styles.tabs}>
           {this.renderTab(Constants.TAB_OPTION.POSTS)}
           {this.renderTab(Constants.TAB_OPTION.ALBUMS)}
@@ -127,7 +123,7 @@ class UserDetailScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.cream
+    backgroundColor: colors.darkBlue
   },
   detailCard: {
     flex: 1,
