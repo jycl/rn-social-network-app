@@ -15,7 +15,7 @@ class UserStore {
   rawUserList = [];
 
   /**
-   * Use the API
+   * Retrieve user list from backend and save to store
    */
   @action
   loadUserList = () => {
@@ -24,6 +24,11 @@ class UserStore {
     });
   };
 
+  /**
+   * Sort user list before returning to display on UI, note that computed
+   * values should be cached as long as observable doesn't change.
+   * @return {Array} sorted array of the rawUserList
+   */
   @computed
   get filteredUserList() {
     let filteredArray = toJS(this.rawUserList)
