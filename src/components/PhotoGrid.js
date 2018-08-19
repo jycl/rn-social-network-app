@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import PropTypes from "prop-types";
 import colors from "../styles/colors";
+import Photo from "./Photo";
 
 /**
  * PhotoGrid component renders a FlatList with data from the userList props.
@@ -41,18 +42,8 @@ class PhotoGrid extends Component {
     if (item.isPlaceholder) {
       return <View style={styles.listItemContainer} />;
     }
-    return (
-      <TouchableOpacity
-        disabled={true}
-        onPress={() => this.props.onPress(item)}
-        style={styles.listItemContainer}
-      >
-        <Image
-          style={{ width: 100, height: 100 }}
-          source={{ uri: item.thumbnailUrl }}
-        />
-      </TouchableOpacity>
-    );
+    const { thumbnailUrl } = item;
+    return <Photo url={thumbnailUrl} />;
   };
 
   /**
