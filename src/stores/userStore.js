@@ -1,6 +1,7 @@
 import { observable, computed, toJS, action } from "mobx";
 import { getUserList } from "../services/APIService";
 import Constants from "../config/constants";
+import postStore from "./postStore";
 
 /**
  * UserStore is an MobX store that manages the state values
@@ -44,8 +45,26 @@ class UserStore {
    */
   @action
   selectTab = category => {
-    this.selectedTab = category;
+    if (this.selectedTab !== category) {
+      this.selectedTab = category;
+      this.loadDataByTabCategory(category);
+    }
   };
+
+  @action
+  loadDataByTabCategory(category) {
+    switch (category) {
+      case Constants.TAB_OPTION.POSTS:
+        postStore.loadPostHistory(this.selectedUser.id);
+        break;
+      case Constants.TAB_OPTION.ALBUMS:
+        break;
+      case Constants.TAB_OPTION.TODOS:
+        break;
+      default:
+        break;
+    }
+  }
 
   isHighlighted = tabTitle => {
     return tabTitle === this.selectedTab;

@@ -58,6 +58,8 @@ describe("UserContainer tests ", () => {
   });
 
   it("Test tab selection in user profile", () => {
+    //track loadDataByTabCategory method which is called in selectTab
+    let spy = jest.spyOn(userStore, "loadDataByTabCategory");
     //expect tab to be default (posts value)
     expect(userStore.selectedTab).toBe(Constants.TAB_OPTION.POSTS);
     expect(userStore.isHighlighted(Constants.TAB_OPTION.POSTS)).toBe(true);
@@ -67,5 +69,8 @@ describe("UserContainer tests ", () => {
     expect(userStore.selectedTab).toBe(testOption);
     expect(userStore.isHighlighted(Constants.TAB_OPTION.POSTS)).toBe(false);
     expect(userStore.isHighlighted(testOption)).toBe(true);
+    expect(spy).toHaveBeenCalledTimes(1);
+    userStore.selectTab(Constants.TAB_OPTION.POSTS);
+    expect(spy).toHaveBeenCalledTimes(2);
   });
 });
