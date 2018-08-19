@@ -26,7 +26,6 @@ class PhotoStore {
   loadAlbums = userId => {
     getAlbumsForUser(userId).then(albums => {
       this.rawAlbumList = albums;
-      this.loadPhotosForAlbums(albums);
     });
   };
 
@@ -36,10 +35,9 @@ class PhotoStore {
   };
 
   @action
-  loadPhotoForAlbumId = albumId => {
-    getPhotosForAlbum(albumId).then(photos => {
-      this.albumPhotoListMapping[albumId] = photos;
-    });
+  loadPhotoForAlbumId = async albumId => {
+    this.albumPhotoListMapping[albumId] = await getPhotosForAlbum(albumId);
+    return this.albumPhotoListMapping[albumId];
   };
 
   @computed
