@@ -1,4 +1,5 @@
 import userStore from "../userStore";
+import Constants from "../../config/constants";
 
 describe("UserContainer tests ", () => {
   it("Check initial state values", () => {
@@ -51,5 +52,17 @@ describe("UserContainer tests ", () => {
       "16 Fiver Road, Hong Kong"
     );
     expect(userStore.selectedUserDetails.workplace).toBe("Hawkins Lab");
+  });
+
+  it("Test tab selection in user profile", () => {
+    //expect tab to be default (posts value)
+    expect(userStore.selectedTab).toBe(Constants.TAB_OPTION.POSTS);
+    expect(userStore.isHighlighted(Constants.TAB_OPTION.POSTS)).toBe(true);
+    //set test option and check related values
+    const testOption = "Family";
+    userStore.selectTab(testOption);
+    expect(userStore.selectedTab).toBe(testOption);
+    expect(userStore.isHighlighted(Constants.TAB_OPTION.POSTS)).toBe(false);
+    expect(userStore.isHighlighted(testOption)).toBe(true);
   });
 });

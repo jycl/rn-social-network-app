@@ -1,5 +1,6 @@
 import { observable, computed, toJS, action } from "mobx";
 import { getUserList } from "../services/APIService";
+import Constants from "../config/constants";
 
 /**
  * UserStore is an MobX store that manages the state values
@@ -15,6 +16,8 @@ class UserStore {
   rawUserList = [];
   @observable
   selectedUser = null;
+  @observable
+  selectedTab = Constants.TAB_OPTION.POSTS;
 
   /**
    * Retrieve user list from backend and save to store
@@ -33,6 +36,19 @@ class UserStore {
   @action
   selectUser = user => {
     this.selectedUser = user;
+  };
+
+  /**
+   * Set the selected user (with displayed profile details)
+   * @param {Object} user object selected from user list
+   */
+  @action
+  selectTab = category => {
+    this.selectedTab = category;
+  };
+
+  isHighlighted = tabTitle => {
+    return tabTitle === this.selectedTab;
   };
 
   /**
