@@ -24,7 +24,7 @@ class UserDetailScreen extends Component {
   }
 
   render() {
-    const { selectedUserDetails } = this.props.userStore;
+    const { selectedUserDetails, selectedTab } = this.props.userStore;
     const { name, email, phone, address, company } = selectedUserDetails;
     return (
       <View style={styles.container}>
@@ -42,11 +42,7 @@ class UserDetailScreen extends Component {
           {this.renderTab(Constants.TAB_OPTION.TODOS)}
         </View>
         <View style={styles.categoryContainer}>
-          <GenericList
-            data={this.props.postStore.postList}
-            renderRowItem={item => <PostListItem item={item} />}
-          />
-          {/* TODO: View displaying information for selected tab */}
+          {this.renderCategoryList(selectedTab)}
         </View>
       </View>
     );
@@ -72,6 +68,28 @@ class UserDetailScreen extends Component {
    * @return {func} Function that invokes selectTab with the passed param
    */
   onPressTab = tabCategory => this.props.userStore.selectTab(tabCategory);
+
+  /**
+   * Render the list with correct data according to the selected tab: Posts, Albums or Todos.
+   * @param {String} category compare with constants to check which list to render.
+   */
+  renderCategoryList(category) {
+    switch (category) {
+      case Constants.TAB_OPTION.POSTS:
+        return (
+          <GenericList
+            data={this.props.postStore.postList}
+            renderRowItem={item => <PostListItem item={item} />}
+          />
+        );
+      case Constants.TAB_OPTION.ALBUMS:
+        return <View />;
+      case Constants.TAB_OPTION.TODOS:
+        return <View />;
+      default:
+        return <View />;
+    }
+  }
 }
 
 const styles = StyleSheet.create({
