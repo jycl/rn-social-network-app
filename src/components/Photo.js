@@ -17,8 +17,7 @@ class Photo extends Component {
   render() {
     return (
       <TouchableOpacity
-        disabled={true}
-        onPress={() => this.props.onPress(item)}
+        onPress={() => this.props.onPress()}
         style={styles.listItemContainer}
       >
         <Image style={styles.photoContainer} source={{ uri: this.props.url }} />

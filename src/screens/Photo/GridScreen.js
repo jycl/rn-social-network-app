@@ -42,7 +42,15 @@ class PhotoGridScreen extends Component {
       return <View style={styles.placeholder} />;
     }
     const { thumbnailUrl } = item;
-    return <Photo url={thumbnailUrl} onPress={this.props.onPress} />;
+    return (
+      <Photo
+        url={thumbnailUrl}
+        onPress={() => {
+          this.props.photoStore.setCurrentPhoto(item);
+          this.props.navigation.navigate("PhotoDetail");
+        }}
+      />
+    );
   };
 }
 

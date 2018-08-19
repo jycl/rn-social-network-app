@@ -5,6 +5,7 @@ import UserDetailScreen from "./src/screens/User/DetailScreen";
 import HomeScreen from "./src/screens/HomeScreen";
 import PostCommentScreen from "./src/screens/Post/CommentScreen";
 import PhotoGridScreen from "./src/screens/Photo/GridScreen";
+import PhotoDetailScreen from "./src/screens/Photo/DetailScreen";
 import { Provider, observer } from "mobx-react";
 import stores from "./src/stores";
 import colors from "./src/styles/colors";
@@ -51,6 +52,10 @@ const AppNavigator = createStackNavigator(
     },
     PhotoGrid: {
       screen: PhotoGridScreen,
+      navigationOptions: navStyleRenderer
+    },
+    PhotoDetail: {
+      screen: PhotoDetailScreen,
       navigationOptions: navStyleRenderer
     }
   },
