@@ -36,7 +36,12 @@ const AppNavigator = createStackNavigator(
             userStore.resetSelection();
             navigation.goBack();
           };
-          return <HeaderBackButton onPress={() => goBack()} />;
+          return (
+            <HeaderBackButton
+              tintColor={colors.lightestBlue}
+              onPress={() => goBack()}
+            />
+          );
         }
       })
     },
