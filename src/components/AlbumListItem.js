@@ -3,11 +3,13 @@ import { Text, View, StyleSheet } from "react-native";
 import colors from "../styles/colors";
 import fontSize from "../styles/fontSize";
 import PropTypes from "prop-types";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 class AlbumListItem extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Icon name="photo-album" color={colors.lightBlue} size={30} />
         <Text style={styles.listItemText}>{this.props.title}</Text>
       </View>
     );
@@ -17,8 +19,8 @@ class AlbumListItem extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "flex-start",
+    flexDirection: "row",
+    alignItems: "center",
     backgroundColor: "transparent"
   },
   listItemContainer: {
@@ -27,7 +29,7 @@ const styles = StyleSheet.create({
   },
   listItemText: {
     color: colors.cream,
-    paddingVertical: 10,
+    padding: 10,
     fontSize: fontSize.medium
   }
 });
