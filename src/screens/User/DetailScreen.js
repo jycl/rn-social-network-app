@@ -4,6 +4,8 @@ import colors from "../../styles/colors";
 import { inject, observer } from "mobx-react";
 import Tab from "../../components/Tab";
 import Constants from "../../config/constants";
+import GenericList from "../../components/GenericList";
+import PostListItem from "../../components/PostListItem";
 
 /**
  * UserDetailScreen is a screen that renders two main UI components.
@@ -13,9 +15,14 @@ import Constants from "../../config/constants";
  *
  * @author Joshua Leung <joshuaycleung@gmail.com>
  */
-@inject("userStore")
+@inject("userStore", "postStore")
 @observer
 class UserDetailScreen extends Component {
+  componentDidMount() {
+    const { id } = this.props.userStore.selectedUser;
+    this.props.postStore.loadPostHistory(id);
+  }
+
   render() {
     const { selectedUserDetails } = this.props.userStore;
     const { name, email, phone, address, company } = selectedUserDetails;
@@ -35,6 +42,10 @@ class UserDetailScreen extends Component {
           {this.renderTab(Constants.TAB_OPTION.TODOS)}
         </View>
         <View style={styles.categoryContainer}>
+          <GenericList
+            data={this.props.postStore.postList}
+            renderRowItem={item => <PostListItem item={item} />}
+          />
           {/* TODO: View displaying information for selected tab */}
         </View>
       </View>

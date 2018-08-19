@@ -1,6 +1,5 @@
 import { observable, computed, toJS, action } from "mobx";
-import { getUserList, getPostHistoryForUser } from "../services/APIService";
-import Constants from "../config/constants";
+import { getPostHistoryForUser } from "../services/APIService";
 
 /**
  * PostStore is an MobX store that manages the state values
