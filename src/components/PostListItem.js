@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { TouchableOpacity, Text, View, StyleSheet } from "react-native";
 import colors from "../styles/colors";
 import fontSize from "../styles/fontSize";
 import PropTypes from "prop-types";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 class PostListItem extends Component {
   render() {
@@ -10,6 +11,21 @@ class PostListItem extends Component {
       <View style={styles.container}>
         <Text style={styles.title}>{this.props.title}</Text>
         <Text style={styles.body}>{this.props.body}</Text>
+        {this.props.onPress && (
+          <View style={styles.commentsContainer}>
+            <TouchableOpacity
+              style={styles.commentsButton}
+              onPress={this.props.onPress}
+            >
+              <Text style={styles.text}>See comments </Text>
+              <Icon
+                name={"mode-comment"}
+                color={colors.lightestBlue}
+                size={fontSize.large}
+              />
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     );
   }
@@ -21,10 +37,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     backgroundColor: "transparent"
   },
-  rowContainer: {
-    padding: 10,
-    backgroundColor: colors.blue
-  },
   title: {
     fontWeight: "bold",
     color: colors.cream,
@@ -35,12 +47,25 @@ const styles = StyleSheet.create({
     color: colors.cream,
     padding: 10,
     fontSize: fontSize.small
+  },
+  text: {
+    color: colors.lightBlue,
+    fontSize: fontSize.small
+  },
+  commentsContainer: {
+    width: "100%",
+    alignItems: "flex-end"
+  },
+  commentsButton: {
+    flexDirection: "row",
+    alignItems: "center"
   }
 });
 
 PostListItem.propTypes = {
   title: PropTypes.string,
-  body: PropTypes.string
+  body: PropTypes.string,
+  onPress: PropTypes.func
 };
 
 PostListItem.defaultProps = {

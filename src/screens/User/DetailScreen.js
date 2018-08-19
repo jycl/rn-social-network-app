@@ -77,9 +77,13 @@ class UserDetailScreen extends Component {
         return (
           <GenericList
             data={this.props.postStore.postList}
-            onPress={this.onPressPostItem}
+            onPressDisabled={true}
             renderRowItem={item => (
-              <PostListItem title={item.title} body={item.body} />
+              <PostListItem
+                title={item.title}
+                body={item.body}
+                onPress={() => this.onPressPostItem(item)}
+              />
             )}
           />
         );
