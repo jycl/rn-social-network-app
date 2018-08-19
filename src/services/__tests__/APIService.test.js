@@ -3,6 +3,9 @@ import {
   getUserList,
   getPostHistoryForUser,
   getCommentsForPost,
+  getAlbumsForUser,
+  getPhotosForAlbum,
+  getTodosForUser,
   APIConfig
 } from "../APIService";
 
@@ -128,5 +131,79 @@ describe("API service testing", () => {
     });
     expect(global.fetch).toHaveBeenCalledTimes(1);
     expect(commentList).toMatchObject(testCommentList);
+  });
+
+  it("Test APIService getAlbumsForUser method", async () => {
+    const testAlbumList = [
+      { userId: 1, id: 1, title: "quidem molestiae enim" },
+      { userId: 1, id: 2, title: "sunt qui excepturi placeat culpa" }
+    ];
+    global.fetch.mockImplementationOnce(() => {
+      return Promise.resolve({
+        ok: true,
+        json: () => {
+          return testAlbumList;
+        }
+      });
+    });
+    let albums = await getAlbumsForUser("1");
+    const url = APIConfig.ALBUMS + `?userId=1`;
+    expect(global.fetch).toHaveBeenCalledWith(url, {
+      method: "GET",
+      headers: { "Content-Type": "application/json; charset=utf-8" }
+    });
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(albums).toMatchObject(testAlbumList);
+  });
+
+  it("Test APIService getPhotosForAlbum method", async () => {
+    const testPhotoList = [
+      {
+        albumId: 1,
+        id: 1,
+        title: "accusamus beatae ad facilis cum similique qui sunt",
+        url: "https://via.placeholder.com/600/92c952",
+        thumbnailUrl: "https://via.placeholder.com/150/92c952"
+      }
+    ];
+    global.fetch.mockImplementationOnce(() => {
+      return Promise.resolve({
+        ok: true,
+        json: () => {
+          return testPhotoList;
+        }
+      });
+    });
+    let photos = await getPhotosForAlbum("1");
+    const url = APIConfig.PHOTOS + `?albumId=1`;
+    expect(global.fetch).toHaveBeenCalledWith(url, {
+      method: "GET",
+      headers: { "Content-Type": "application/json; charset=utf-8" }
+    });
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(photos).toMatchObject(testPhotoList);
+  });
+
+  it("Test APIService getTodosForUser method", async () => {
+    const testTodoList = [
+      { userId: 1, id: 1, title: "delectus aut autem", completed: false },
+      { userId: 1, id: 2, title: "quis ut nam", completed: true }
+    ];
+    global.fetch.mockImplementationOnce(() => {
+      return Promise.resolve({
+        ok: true,
+        json: () => {
+          return testTodoList;
+        }
+      });
+    });
+    let todos = await getTodosForUser("1");
+    const url = APIConfig.TODOS + `?userId=1`;
+    expect(global.fetch).toHaveBeenCalledWith(url, {
+      method: "GET",
+      headers: { "Content-Type": "application/json; charset=utf-8" }
+    });
+    expect(global.fetch).toHaveBeenCalledTimes(1);
+    expect(todos).toMatchObject(testTodoList);
   });
 });

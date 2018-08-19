@@ -72,10 +72,40 @@ export async function getPostHistoryForUser(userId) {
 
 /**
  * Get full post history list for user with input userId
- * @param {String} userId used to query posts with this userId
- * @return {Array<Objects>} each object represents a post
+ * @param {String} postId parent Id used to query comments with this postId
+ * @return {Array<Objects>} each object represents a post record
  */
 export async function getCommentsForPost(postId) {
   const url = APIConfig.COMMENTS + `?postId=${postId}`;
+  return await get(url);
+}
+
+/**
+ * Get all photo albums related to user by userId
+ * @param {String} userId parent Id used to query comments with this postId
+ * @return {Array<Objects>} each object represents an album record
+ */
+export async function getAlbumsForUser(userId) {
+  const url = APIConfig.ALBUMS + `?userId=${userId}`;
+  return await get(url);
+}
+
+/**
+ * Get all photos from the photo album with albumId
+ * @param {String} albumId parent Id used to query photos with this albumId
+ * @return {Array<Objects>} each object represents a photo record
+ */
+export async function getPhotosForAlbum(albumId) {
+  const url = APIConfig.PHOTOS + `?albumId=${albumId}`;
+  return await get(url);
+}
+
+/**
+ * Get full todo list for user
+ * @param {String} userId parent Id used to query todos with this userId
+ * @return {Array<Objects>} each object represents a todo record
+ */
+export async function getTodosForUser(userId) {
+  const url = APIConfig.TODOS + `?userId=${userId}`;
   return await get(url);
 }
