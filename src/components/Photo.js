@@ -5,7 +5,8 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import colors from "../styles/colors";
 
 /**
- * Photo component renders an Image.
+ * Photo component renders an Image and displays placeholder when
+ * image has not been loaded.
  *
  * Props:
  * @property {String} url source uri to retrieve thumbnail for image

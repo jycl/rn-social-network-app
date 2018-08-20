@@ -5,6 +5,17 @@ import fontSize from "../styles/fontSize";
 import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
+/**
+ * PostListItem is a component that renders the list row view for each post
+ * under the post tab (post history).
+ *
+ * Props:
+ * @property {String} title post title
+ * @property {String} body post body
+ * @property {func} onPress callback when the comment icon for post is pressed
+ *
+ * @author Joshua Leung <joshuaycleung@gmail.com>
+ */
 class PostListItem extends Component {
   render() {
     return (

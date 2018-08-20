@@ -9,26 +9,27 @@ import colors from "../styles/colors";
  * circular icon to the left.
  *
  * Props:
- * @property {String} url source uri to retrieve thumbnail for image
- * @property {func} onPress callback method invoked when photo is pressed
+ * @property {String} initials two character string to display on left icon
+ * @property {object} details object containing user details, if the corresponding
+ *                            parameter is null or undefined, display empty string
  *
  * @author Joshua Leung <joshuaycleung@gmail.com>
  */
 class UserDetailCard extends Component {
   render() {
     const { details, initials } = this.props;
-    const { name, email, phone, address, workplace, geo } = details;
+    const { name, email, phone, address, workplace } = details;
     return (
       <View style={styles.container}>
         <View style={styles.initialsContainer}>
           <Text style={styles.initials}>{initials}</Text>
         </View>
         <View style={{ flex: 1 }}>
-          {this.renderLabelValue("Name: ", name)}
-          {this.renderLabelValue("Email: ", email)}
-          {this.renderLabelValue("Phone: ", phone)}
-          {this.renderLabelValue("Address: ", address)}
-          {this.renderLabelValue("Company: ", workplace)}
+          {this.renderLabelValue("Name: ", name || "")}
+          {this.renderLabelValue("Email: ", email || "")}
+          {this.renderLabelValue("Phone: ", phone || "")}
+          {this.renderLabelValue("Address: ", address || "")}
+          {this.renderLabelValue("Company: ", workplace || "")}
         </View>
       </View>
     );
@@ -83,13 +84,13 @@ const styles = StyleSheet.create({
 });
 
 UserDetailCard.propTypes = {
-  url: PropTypes.string,
-  onPress: PropTypes.func
+  details: PropTypes.object,
+  initials: PropTypes.string
 };
 
 UserDetailCard.defaultProps = {
-  url: "",
-  onPress: () => {}
+  details: {},
+  initials: "AA"
 };
 
 export default UserDetailCard;

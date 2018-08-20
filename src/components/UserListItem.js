@@ -4,6 +4,15 @@ import colors from "../styles/colors";
 import fontSize from "../styles/fontSize";
 import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/MaterialIcons";
+
+/**
+ * UserListItem component renders a row item for each user on the user list.
+ *
+ * Props:
+ * @property {String} name full name of the user
+ *
+ * @author Joshua Leung <joshuaycleung@gmail.com>
+ */
 class UserListItem extends Component {
   render() {
     return (

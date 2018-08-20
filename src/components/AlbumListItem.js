@@ -5,6 +5,16 @@ import fontSize from "../styles/fontSize";
 import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
+/**
+ * AlbumListItem is a component that renders the list row view for each album.
+ *
+ * Props:
+ * @property {String} title title of the album displayed in the center of the row
+ * @property {Number} photoCount number of photos in album displayed next to photos icon
+ * @property {func} onPress callback function when photos icon is pressed
+ *
+ * @author Joshua Leung <joshuaycleung@gmail.com>
+ */
 class AlbumListItem extends Component {
   render() {
     const { title, photoCount, onPress } = this.props;
@@ -70,11 +80,14 @@ const styles = StyleSheet.create({
 
 AlbumListItem.propTypes = {
   title: PropTypes.string,
-  onPress: PropTypes.func
+  onPress: PropTypes.func,
+  photoCount: PropTypes.number
 };
 
 AlbumListItem.defaultProps = {
-  title: "title"
+  title: "title",
+  onPress: () => {},
+  photoCount: 0
 };
 
 export default AlbumListItem;

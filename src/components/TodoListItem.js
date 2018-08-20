@@ -5,6 +5,16 @@ import fontSize from "../styles/fontSize";
 import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
+/**
+ * TodoListItem is a component that renders the list row view for each todo.
+ * under the todos tab.
+ *
+ * Props:
+ * @property {String} title todo title / description
+ * @property {bool} completed indicator whether to render complete (check) icon
+ *
+ * @author Joshua Leung <joshuaycleung@gmail.com>
+ */
 class TodoListItem extends Component {
   render() {
     return (

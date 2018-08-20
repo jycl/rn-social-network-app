@@ -4,6 +4,17 @@ import colors from "../styles/colors";
 import fontSize from "../styles/fontSize";
 import PropTypes from "prop-types";
 
+/**
+ * CommentItem is a component that renders the list row view for each comment
+ * under the selected post.
+ *
+ * Props:
+ * @property {String} title comment title
+ * @property {String} body comment body
+ * @property {String} author email/name of the commenter
+ *
+ * @author Joshua Leung <joshuaycleung@gmail.com>
+ */
 class CommentItem extends Component {
   render() {
     const { title, body, author } = this.props;

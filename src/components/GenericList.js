@@ -5,9 +5,10 @@ import colors from "../styles/colors";
 import fontSize from "../styles/fontSize";
 
 /**
- * GenericList component renders a FlatList with data from the userList props.
- * The list displays users' names retrieved from the backend and allows the
- * app user to press the list item to navigate to get more details (via onPress props).
+ * GenericList component renders a FlatList with data that will populate each row rendered by
+ * the renderRowItem props. The list row depends on the passed renderRowItem render method,
+ * if no method is passed the default empty <View/> is rendered.  Each row can also have a onPress
+ * callback the TouchableOpacity can be disabled via props.
  *
  * Props:
  * @property {array} data array of objects that each represent each row to display their props
@@ -32,7 +33,7 @@ class GenericList extends Component {
   /**
    * Render each list item as button passing row item into props.onPress
    */
-  _renderRow = ({ item, index }) => {
+  _renderRow = ({ item }) => {
     return (
       <TouchableOpacity
         disabled={this.props.onPressDisabled}
@@ -50,7 +51,7 @@ class GenericList extends Component {
   _renderSeparator = () => <View style={styles.separator} />;
 
   /**
-   *  Set list item key by the user Id from backend and its index
+   *  Set list item key by the record Id from backend and its index
    */
   _keyExtractor = (item, index) => `${item.id}_${index}`;
 }
