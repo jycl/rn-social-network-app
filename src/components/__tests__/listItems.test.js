@@ -1,6 +1,5 @@
 import React from "react";
-import { configure, shallow } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import { shallow } from "enzyme";
 import CommentItem from "../CommentItem";
 import AlbumListItem from "../AlbumListItem";
 import PostListItem from "../PostListItem";
@@ -8,9 +7,6 @@ import TodoListItem from "../TodoListItem";
 import UserListItem from "../UserListItem";
 
 describe("List Item Testing", () => {
-  beforeAll(() => {
-    configure({ adapter: new Adapter() });
-  });
   it("AlbumListItem renders correctly", () => {
     const component = shallow(<AlbumListItem />);
     expect(component).toMatchSnapshot();
