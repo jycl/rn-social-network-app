@@ -20,6 +20,9 @@ const WINDOW_WIDTH = Dimensions.get("window").width;
 class PhotoDetailScreen extends Component {
   render() {
     const { currentPhoto } = this.props.photoStore;
+    if (!currentPhoto) {
+      return <View style={styles.container} />; //render default view if no photo set
+    }
     return (
       <View style={styles.container}>
         <View style={styles.imageContainer}>
