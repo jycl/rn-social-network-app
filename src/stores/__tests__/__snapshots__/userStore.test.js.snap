@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserContainer tests  Snapshot test of UserStore 1`] = `
+UserStore {
+  "isHighlighted": [Function],
+}
+`;

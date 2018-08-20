@@ -1,49 +1,86 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import React, { Component } from "react";
+import { createStackNavigator, HeaderBackButton } from "react-navigation";
+import UserListScreen from "./src/screens/User/ListScreen";
+import UserDetailScreen from "./src/screens/User/DetailScreen";
+import HomeScreen from "./src/screens/HomeScreen";
+import PostCommentScreen from "./src/screens/Post/CommentScreen";
+import PhotoGridScreen from "./src/screens/Photo/GridScreen";
+import PhotoDetailScreen from "./src/screens/Photo/DetailScreen";
+import { Provider, observer } from "mobx-react";
+import stores from "./src/stores";
+import colors from "./src/styles/colors";
+import fontSize from "./src/styles/fontSize";
+import userStore from "./src/stores/userStore";
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+//callback to update the navBar header title value
+const navStyleRenderer = () => ({
+  title: `${userStore.selectedUser.name}`
 });
+const AppNavigator = createStackNavigator(
+  {
+    Home: { screen: HomeScreen },
+    UserList: {
+      screen: UserListScreen,
+      navigationOptions: ({ navigation }) => ({
+        title: `User List`,
+        headerTitleStyle: {
+          fontSize: fontSize.large
+        }
+      })
+    },
+    UserDetail: {
+      screen: UserDetailScreen,
+      navigationOptions: ({ navigation }) => ({
+        title: `${userStore.selectedUser.name}`,
+        headerLeft: () => {
+          let goBack = () => {
+            userStore.resetSelection();
+            navigation.goBack();
+          };
+          return (
+            <HeaderBackButton
+              tintColor={colors.lightestBlue}
+              onPress={() => goBack()}
+            />
+          );
+        }
+      })
+    },
+    PostComment: {
+      screen: PostCommentScreen,
+      navigationOptions: navStyleRenderer
+    },
+    PhotoGrid: {
+      screen: PhotoGridScreen,
+      navigationOptions: navStyleRenderer
+    },
+    PhotoDetail: {
+      screen: PhotoDetailScreen,
+      navigationOptions: navStyleRenderer
+    }
+  },
+  {
+    initialRouteName: "UserList",
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: colors.darkestBlue
+      },
+      headerTintColor: colors.lightestBlue,
+      headerTitleStyle: {
+        fontSize: fontSize.medium
+      },
+      headerBackTitle: " "
+    }
+  }
+);
 
-type Props = {};
-export default class App extends Component<Props> {
+@observer
+export default class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
+      <Provider {...stores}>
+        <AppNavigator />
+      </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
