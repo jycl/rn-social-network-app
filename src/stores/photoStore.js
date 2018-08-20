@@ -5,20 +5,17 @@ import { getAlbumsForUser, getPhotosForAlbum } from "../services/APIService";
  * PhotoStore is an MobX store that manages the state values of components related
  * to photo albums and photo display.
  *
- * State params:
+ * State params / getters:
  * @param {Array} rawAlbumList Array of posts for user retrieved from backend API
  * @param {Array} albumList list of albums that has been converted from MobX object
  */
 class PhotoStore {
   @observable
   rawAlbumList = [];
-
   @observable
   currentAlbum = null;
-
   @observable
   currentPhoto = null;
-
   @observable
   albumPhotoListMapping = new Map();
 
@@ -55,20 +52,26 @@ class PhotoStore {
     this.currentPhoto = null;
   }
 
+  /**
+   * Sort album list before returning to display on UI as the albums are
+   * added to rawAlbumList asynchronously (after retrieving photos).
+   * Note that computed values should be cached as long as observable doesn't change.
+   * @return {Array} sorted array of the rawAlbumList
+   */
   @computed
   get albumList() {
     let filteredArray = toJS(this.rawAlbumList)
       .concat()
       .sort((lhsUser, rhsUser) => {
         var idLeft = lhsUser.id;
-        var idRight = rhsUser.id; // ignore upper and lowercase
+        var idRight = rhsUser.id;
         if (idLeft < idRight) {
           return -1;
         }
         if (idLeft > idRight) {
           return 1;
         }
-        // names must be equal
+        // ids must be equal
         return 0;
       });
     return filteredArray;

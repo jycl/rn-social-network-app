@@ -6,12 +6,14 @@ import photoStore from "./photoStore";
 import todoStore from "./todoStore";
 
 /**
- * UserStore is an MobX store that manages the state values
- * related to the users and will update components that are
- * observing it (have this store injected).
+ * UserStore is an MobX store that manages the state values related to the users
+ * and will update components that are observing it (have this store injected).
  *
- * State params:
+ * State params / getters:
  * @param {Array} rawUserList Array of users saved to retrieved from backend API
+ * @param {Object} selectedUser Array of users saved to retrieved from backend API
+ * @param {String} selectedTab Represents the currently selected tab (default Posts)
+ * @param {Object} selectedUserDetails User details to display in UserDetailScreen
  * @param {Array} filteredUserList Sorted list of users based on sorting criteria (default by name)
  */
 class UserStore {
@@ -53,6 +55,11 @@ class UserStore {
     }
   };
 
+  /**
+   * Callback on tab select that loads the data for the corresponding
+   * store in order to render the related UI components with data.
+   * @param {String} category selected tab title / category
+   */
   @action
   loadDataByTabCategory(category) {
     switch (category) {
@@ -70,6 +77,11 @@ class UserStore {
     }
   }
 
+  /**
+   * Reset current selections specific to user (e.g. Albums, Post history)
+   * so that when a new user is selected the state params are not still rendered.
+   * Note: Will clear the data from Post/Photo/TodoStores as well.
+   */
   @action
   resetSelection = () => {
     this.selectedUser = null;
@@ -79,6 +91,9 @@ class UserStore {
     todoStore.clearData();
   };
 
+  /**
+   * @return {bool} inidcate whether current tab title is the selected one
+   */
   isHighlighted = tabTitle => {
     return tabTitle === this.selectedTab;
   };

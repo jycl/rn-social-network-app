@@ -5,7 +5,7 @@ import { getTodosForUser } from "../services/APIService";
  * TodoStore is an MobX store that manages the state values of components related
  * to the todo list to display.
  *
- * State params:
+ * State params / getters:
  * @param {Array} rawTodoList Array of todos for user retrieved from backend API
  * @param {Array} todoList list of todos that has been converted from MobX object
  */

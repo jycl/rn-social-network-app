@@ -11,19 +11,21 @@ import {
  *
  * State params:
  * @param {Array} rawPostList Array of posts for user retrieved from backend API
+ * @param {Array} currentPost Selected post to see related comments
+ * @param {Array} currentPostComments stored comments related to post retrieved from backend
  * @param {Array} postList list of posts that has been converted from MobX object
+ * @param {Array} currentPostCommentsList  list of comments that has been converted from MobX object
  */
 class PostStore {
   @observable
   rawPostList = [];
-
   @observable
   currentPost = null;
   @observable
   currentPostComments = [];
 
   /**
-   * Retrieve user list from backend and save to store
+   * Retrieve post list from backend and save to store
    */
   @action
   loadPostHistory = userId => {
@@ -37,6 +39,9 @@ class PostStore {
     this.currentPost = post;
   };
 
+  /**
+   * Retrieve comments for current post from backend and save to store
+   */
   @action
   loadPostComments = postId => {
     getCommentsForPost(postId).then(comments => {
