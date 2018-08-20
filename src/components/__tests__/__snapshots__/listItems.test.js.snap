@@ -4,6 +4,8 @@ exports[`List Item Testing AlbumListItem renders correctly 1`] = `
 ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <AlbumListItem
+    onPress={[Function]}
+    photoCount={0}
     title="title"
   />,
   Symbol(enzyme.__renderer__): Object {
@@ -59,6 +61,7 @@ ShallowWrapper {
         >
           <TouchableOpacity
             activeOpacity={0.2}
+            onPress={[Function]}
             style={
               Object {
                 "alignItems": "center",
@@ -74,7 +77,7 @@ ShallowWrapper {
                 }
               }
             >
-              See photos (undefined) 
+              See photos (0) 
             </Component>
             <Icon
               allowFontScaling={false}
@@ -182,6 +185,7 @@ ShallowWrapper {
           "children": Array [
             <TouchableOpacity
               activeOpacity={0.2}
+              onPress={[Function]}
               style={
                 Object {
                   "alignItems": "center",
@@ -197,7 +201,7 @@ ShallowWrapper {
                   }
                 }
               >
-                See photos (undefined) 
+                See photos (0) 
               </Component>
               <Icon
                 allowFontScaling={false}
@@ -241,7 +245,7 @@ ShallowWrapper {
                     }
                   }
                 >
-                  See photos (undefined) 
+                  See photos (0) 
                 </Component>,
                 <Icon
                   allowFontScaling={false}
@@ -251,7 +255,7 @@ ShallowWrapper {
                   size={22}
                 />,
               ],
-              "onPress": undefined,
+              "onPress": [Function],
               "style": Object {
                 "alignItems": "center",
                 "flexDirection": "row",
@@ -264,14 +268,14 @@ ShallowWrapper {
                 "key": undefined,
                 "nodeType": "class",
                 "props": Object {
-                  "children": "See photos (undefined) ",
+                  "children": "See photos (0) ",
                   "style": Object {
                     "color": "#0CAADC",
                     "fontSize": 16,
                   },
                 },
                 "ref": null,
-                "rendered": "See photos (undefined) ",
+                "rendered": "See photos (0) ",
                 "type": [Function],
               },
               Object {
@@ -362,6 +366,7 @@ ShallowWrapper {
           >
             <TouchableOpacity
               activeOpacity={0.2}
+              onPress={[Function]}
               style={
                 Object {
                   "alignItems": "center",
@@ -377,7 +382,7 @@ ShallowWrapper {
                   }
                 }
               >
-                See photos (undefined) 
+                See photos (0) 
               </Component>
               <Icon
                 allowFontScaling={false}
@@ -485,6 +490,7 @@ ShallowWrapper {
             "children": Array [
               <TouchableOpacity
                 activeOpacity={0.2}
+                onPress={[Function]}
                 style={
                   Object {
                     "alignItems": "center",
@@ -500,7 +506,7 @@ ShallowWrapper {
                     }
                   }
                 >
-                  See photos (undefined) 
+                  See photos (0) 
                 </Component>
                 <Icon
                   allowFontScaling={false}
@@ -544,7 +550,7 @@ ShallowWrapper {
                       }
                     }
                   >
-                    See photos (undefined) 
+                    See photos (0) 
                   </Component>,
                   <Icon
                     allowFontScaling={false}
@@ -554,7 +560,7 @@ ShallowWrapper {
                     size={22}
                   />,
                 ],
-                "onPress": undefined,
+                "onPress": [Function],
                 "style": Object {
                   "alignItems": "center",
                   "flexDirection": "row",
@@ -567,14 +573,14 @@ ShallowWrapper {
                   "key": undefined,
                   "nodeType": "class",
                   "props": Object {
-                    "children": "See photos (undefined) ",
+                    "children": "See photos (0) ",
                     "style": Object {
                       "color": "#0CAADC",
                       "fontSize": 16,
                     },
                   },
                   "ref": null,
-                  "rendered": "See photos (undefined) ",
+                  "rendered": "See photos (0) ",
                   "type": [Function],
                 },
                 Object {
