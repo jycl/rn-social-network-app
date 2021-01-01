@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { createStackNavigator, HeaderBackButton } from "react-navigation";
+import { createStackNavigator, createAppContainer, HeaderBackButton } from "react-navigation";
 import UserListScreen from "./src/screens/User/ListScreen";
 import UserDetailScreen from "./src/screens/User/DetailScreen";
 import HomeScreen from "./src/screens/HomeScreen";
@@ -61,7 +61,7 @@ const AppNavigator = createStackNavigator(
   },
   {
     initialRouteName: "UserList",
-    navigationOptions: {
+    defaultNavigationOptions: {
       headerStyle: {
         backgroundColor: colors.darkestBlue
       },
@@ -75,12 +75,15 @@ const AppNavigator = createStackNavigator(
 );
 
 @observer
-export default class App extends Component {
+class App extends Component {
   render() {
+    const AppContainer = createAppContainer(AppNavigator);
     return (
       <Provider {...stores}>
-        <AppNavigator />
+        <AppContainer />
       </Provider>
     );
   }
 }
+
+export default App;
