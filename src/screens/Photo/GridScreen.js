@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { inject, observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import { View, StyleSheet } from "react-native";
 import Grid from "../../components/Grid";
 import Constants from "../../config/constants";
 import { formatDataForGrid } from "../../utility/DataFormatHelper";
 import colors from "../../styles/colors";
 import Photo from "../../components/Photo";
-import PropTypes from "prop-types";
+import { useStore } from "../../stores";
 
 /**
  * PhotoGridScreen is a screen that renders a grid of photos for a specific
@@ -17,31 +17,19 @@ import PropTypes from "prop-types";
  *
  * @author Joshua Leung <joshuaycleung@gmail.com>
  */
-@inject("photoStore")
-@observer
-class PhotoGridScreen extends Component {
-  render() {
-    const { currentAlbum, albumPhotoListMapping } = this.props.photoStore;
-    let formattedData = formatDataForGrid(
-      albumPhotoListMapping[currentAlbum.id],
-      Constants.NUM_GRID_COLUMNS,
-      { isPlaceholder: true }
-    );
-    return (
-      <View style={styles.container}>
-        <Grid
-          data={formattedData}
-          numColumns={Constants.NUM_GRID_COLUMNS}
-          renderGridItem={this.renderPhotoItem}
-        />
-      </View>
-    );
-  }
+const PhotoGridScreen = ({ navigation }) => {
+  const { photoStore } = useStore();
+  const { currentAlbum, albumPhotoListMapping } = photoStore;
+  let formattedData = formatDataForGrid(
+    albumPhotoListMapping[currentAlbum.id],
+    Constants.NUM_GRID_COLUMNS,
+    { isPlaceholder: true }
+  );
 
   /**
    * Render each list item as button passing row item into props.onPress
    */
-  renderPhotoItem = ({ item }) => {
+  const renderPhotoItem = ({ item }) => {
     if (item.isPlaceholder) {
       return <View style={styles.placeholder} />;
     }
@@ -50,12 +38,22 @@ class PhotoGridScreen extends Component {
       <Photo
         url={thumbnailUrl}
         onPress={() => {
-          this.props.photoStore.setCurrentPhoto(item);
-          this.props.navigation.navigate("PhotoDetail");
+          photoStore.setCurrentPhoto(item);
+          navigation.navigate("PhotoDetail");
         }}
       />
     );
   };
+
+  return (
+    <View style={styles.container}>
+      <Grid
+        data={formattedData}
+        numColumns={Constants.NUM_GRID_COLUMNS}
+        renderGridItem={renderPhotoItem}
+      />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -70,8 +68,4 @@ const styles = StyleSheet.create({
   }
 });
 
-PhotoGridScreen.wrappedComponent.propTypes = {
-  photoStore: PropTypes.object.isRequired //to test injected stores
-};
-
-export default PhotoGridScreen;
+export default observer(PhotoGridScreen);

@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import GenericList from "../../components/GenericList";
 import UserListItem from "../../components/UserListItem";
 import colors from "../../styles/colors";
-import { inject, observer } from "mobx-react";
-import PropTypes from "prop-types";
+import { observer } from "mobx-react-lite";
+import { useStore } from "../../stores";
 
 /**
  * UserListScreen is a screen that renders UI components displaying
@@ -12,33 +12,31 @@ import PropTypes from "prop-types";
  *
  * @author Joshua Leung <joshuaycleung@gmail.com>
  */
-@inject("userStore")
-@observer
-class UserListScreen extends Component {
-  componentDidMount() {
-    this.props.userStore.loadUserList();
-  }
+const UserListScreen = ({ navigation }) => {
+  const { userStore } = useStore();
+  useEffect(() => { userStore.loadUserList(); }, []);
 
-  /**
-   * Update UserStore with selected user Object and navigate to UserDetailScreen.
-   * @param {Object} user
-   */
-  onPressUserRow = user => {
-    this.props.userStore.selectUser(user);
-    this.props.navigation.navigate("UserDetail");
+  // Update UserStore with selected user and navigate to UserDetailScreen.
+  const onPressUserRow = user => {
+    userStore.selectUser(user);
+    navigation.navigate({
+      routeName: 'UserDetail',
+      params: {
+        name: user.name,
+        onBack: userStore.resetSelection,
+      }
+    });
   };
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <GenericList
-          data={this.props.userStore.filteredUserList}
-          onPress={this.onPressUserRow}
-          renderRowItem={item => <UserListItem name={item.name} />}
-        />
-      </View>
-    );
-  }
+  return (
+    <View style={styles.container}>
+      <GenericList
+        data={userStore.filteredUserList}
+        onPress={onPressUserRow}
+        renderRowItem={item => <UserListItem name={item.name} />}
+      />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -48,8 +46,4 @@ const styles = StyleSheet.create({
   }
 });
 
-UserListScreen.wrappedComponent.propTypes = {
-  userStore: PropTypes.object.isRequired //to test injected stores
-};
-
-export default UserListScreen;
+export default observer(UserListScreen);

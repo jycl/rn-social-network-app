@@ -1,4 +1,4 @@
-import { observable, computed, toJS, action } from "mobx";
+import { makeObservable, observable, computed, toJS, action } from "mobx";
 import { getAlbumsForUser, getPhotosForAlbum } from "../services/APIService";
 
 /**
@@ -10,41 +10,48 @@ import { getAlbumsForUser, getPhotosForAlbum } from "../services/APIService";
  * @param {Array} albumList list of albums that has been converted from MobX object
  */
 class PhotoStore {
-  @observable
   rawAlbumList = [];
-  @observable
   currentAlbum = null;
-  @observable
   currentPhoto = null;
-  @observable
   albumPhotoListMapping = new Map();
+
+  constructor() {
+    makeObservable(this, {
+      rawAlbumList: observable,
+      currentAlbum: observable,
+      currentPhoto: observable,
+      albumPhotoListMapping: observable,
+      loadPhotoAlbums: action,
+      setCurrentAlbum: action,
+      setCurrentPhoto: action,
+      clearData: action,
+      albumList: computed,
+    });
+}
 
   /**
    * Retrieve user list from backend and save to store
    */
-  @action
   loadPhotoAlbums = userId => {
     getAlbumsForUser(userId).then(albums => {
       albums.forEach(async album => {
         let photos = await getPhotosForAlbum(album.id);
         album.photoCount = photos.length;
+        // TODO do not update observable this way, use a set method 
         this.albumPhotoListMapping[album.id] = photos;
         this.rawAlbumList.push(album);
       });
     });
   };
 
-  @action
   setCurrentAlbum = album => {
     this.currentAlbum = album;
   };
 
-  @action
   setCurrentPhoto = photo => {
     this.currentPhoto = photo;
   };
 
-  @action
   clearData() {
     this.rawAlbumList = [];
     this.albumPhotoListMapping = new Map();
@@ -58,7 +65,6 @@ class PhotoStore {
    * Note that computed values should be cached as long as observable doesn't change.
    * @return {Array} sorted array of the rawAlbumList
    */
-  @computed
   get albumList() {
     let filteredArray = toJS(this.rawAlbumList)
       .concat()
@@ -77,5 +83,5 @@ class PhotoStore {
     return filteredArray;
   }
 }
-const photoStore = new PhotoStore();
-export default photoStore;
+
+export default PhotoStore;

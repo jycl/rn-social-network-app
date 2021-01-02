@@ -1,4 +1,4 @@
-import { observable, computed, toJS, action } from "mobx";
+import { observable, computed, toJS, action, makeObservable } from "mobx";
 import { getTodosForUser } from "../services/APIService";
 
 /**
@@ -10,28 +10,31 @@ import { getTodosForUser } from "../services/APIService";
  * @param {Array} todoList list of todos that has been converted from MobX object
  */
 class TodoStore {
-  @observable
   rawTodoList = [];
 
+  constructor() {
+    makeObservable(this, {
+      rawTodoList: observable,
+      setTodoList: action,
+      clearData: action,
+      todoList: computed,
+    });
+  }
+  
   /**
    * Retrieve user list from backend and save to store
    */
-  @action
-  loadTodoList = userId => {
-    getTodosForUser(userId).then(todos => {
-      this.rawTodoList = todos;
-    });
-  };
+  loadTodoList = userId => getTodosForUser(userId).then(this.setTodoList);
 
-  @action
+  setTodoList = todos => this.rawTodoList = todos;
+
   clearData() {
     this.rawTodoList = [];
   }
 
-  @computed
   get todoList() {
     return toJS(this.rawTodoList);
   }
 }
-const todoStore = new TodoStore();
-export default todoStore;
+
+export default TodoStore;

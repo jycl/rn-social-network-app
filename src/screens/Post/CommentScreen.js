@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import { View, StyleSheet } from "react-native";
 import colors from "../../styles/colors";
-import { inject, observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import GenericList from "../../components/GenericList";
 import PostListItem from "../../components/PostListItem";
 import CommentItem from "../../components/CommentItem";
-import PropTypes from "prop-types";
+import { useStore } from "../../stores";
 
 /**
  * PostCommentScreen is a screen that manages the views rendered for the
@@ -16,34 +16,31 @@ import PropTypes from "prop-types";
  *
  * @author Joshua Leung <joshuaycleung@gmail.com>
  */
-@inject("postStore")
-@observer
-class PostCommentScreen extends Component {
-  render() {
-    const { currentPostCommentsList, currentPost } = this.props.postStore;
-    return (
-      <View style={styles.container}>
-        <PostListItem title={currentPost.title} body={currentPost.body} />
-        <View style={styles.commentsContainer}>
-          <GenericList
-            data={currentPostCommentsList}
-            renderRowItem={this.renderComment}
-            onPressDisabled={true}
-          />
-        </View>
-      </View>
-    );
-  }
-
+const PostCommentScreen = () => {
+  const { postStore } = useStore();
+  const { currentPostCommentsList, currentPost } = postStore;
   /**
    * Render method that extracts required values from item and passes into
    * component as props.
    * @param {Object} comment Object record from postStore
    */
-  renderComment = comment => {
+  const renderComment = comment => {
     const { name, body, email } = comment;
     return <CommentItem title={name} body={body} author={email} />;
   };
+
+  return (
+    <View style={styles.container}>
+      <PostListItem title={currentPost.title} body={currentPost.body} />
+      <View style={styles.commentsContainer}>
+        <GenericList
+          data={currentPostCommentsList}
+          renderRowItem={renderComment}
+          onPressDisabled={true}
+        />
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -60,8 +57,4 @@ const styles = StyleSheet.create({
   }
 });
 
-PostCommentScreen.wrappedComponent.propTypes = {
-  postStore: PropTypes.object.isRequired //to test injected stores
-};
-
-export default PostCommentScreen;
+export default observer(PostCommentScreen);

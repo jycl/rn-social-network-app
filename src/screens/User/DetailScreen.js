@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import colors from "../../styles/colors";
-import { inject, observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import Tab from "../../components/Tab";
 import Constants from "../../config/constants";
 import GenericList from "../../components/GenericList";
@@ -10,8 +10,7 @@ import AlbumListItem from "../../components/AlbumListItem";
 import TodoListItem from "../../components/TodoListItem";
 import UserDetailCard from "../../components/UserDetailCard";
 import { getInitialsFromName } from "../../utility/DataFormatHelper";
-import PropTypes from "prop-types";
-
+import { useStore } from "../../stores";
 /**
  * UserDetailScreen is a screen that renders two main UI components.
  * The upper component displays the user details while the lower
@@ -20,53 +19,67 @@ import PropTypes from "prop-types";
  *
  * @author Joshua Leung <joshuaycleung@gmail.com>
  */
-@inject("userStore", "postStore", "photoStore", "todoStore")
-@observer
-class UserDetailScreen extends Component {
-  componentDidMount() {
-    const { id } = this.props.userStore.selectedUser;
-    this.props.postStore.loadPostHistory(id); //load the default tab selection details
-  }
 
-  render() {
-    const { selectedUserDetails, selectedTab } = this.props.userStore;
-    const { name } = selectedUserDetails;
-    const initials = getInitialsFromName(name);
-    return (
-      <View style={styles.container}>
-        <UserDetailCard details={selectedUserDetails} initials={initials} />
-        <View style={styles.tabs}>
-          {this.renderTab(Constants.TAB_OPTION.POSTS)}
-          {this.renderTab(Constants.TAB_OPTION.ALBUMS)}
-          {this.renderTab(Constants.TAB_OPTION.TODOS)}
-        </View>
-        <View style={styles.categoryContainer}>
-          {this.renderCategoryList(selectedTab)}
-        </View>
-      </View>
-    );
-  }
+/**
+ * @param {String} title String displayed on tab and also used to determine selected/highlight tab
+ * @return {JSX<Component>} <Tab> component configured to display title with onPress callback
+ */
+
+ const UserDetailScreen = ({
+  navigation,
+}) => {
+  const {
+    userStore,
+    postStore,
+    photoStore,
+    todoStore
+  } = useStore();
+  useEffect(() => {
+    if (userStore.selectedUser) {
+      const { id } = userStore.selectedUser;
+      postStore.loadPostHistory(id); // load the default tab selection details  
+    }
+  }, []);
+  const { selectedUserDetails, selectedTab } = userStore;
+  const { name } = selectedUserDetails;
+  const initials = getInitialsFromName(name);
 
   /**
-   * @param {String} title String displayed on tab and also used to determine selected/highlight tab
-   * @return {JSX<Component>} <Tab> component configured to display title with onPress callback
+   * @param {String} tabCategory tab title used set the selected tab in UserStore
+   * @return {func} Function that invokes selectTab with the passed param
    */
-  renderTab(title) {
-    const isHighlighted = this.props.userStore.isHighlighted(title);
+  const onPressTab = tabCategory => userStore.selectTab(tabCategory);
+
+  const renderTab = (title) => {
+    const isHighlighted = userStore.isHighlighted(title);
     return (
       <Tab
         title={title}
-        onPress={() => this.onPressTab(title)}
+        onPress={() => onPressTab(title)}
         isHighlighted={isHighlighted}
       />
     );
   }
 
   /**
-   * @param {String} tabCategory tab title used set the selected tab in UserStore
-   * @return {func} Function that invokes selectTab with the passed param
+   * Update PostStore with selected post Object, load related comments and
+   * navigate to PostCommentScreen.
+   * @param {Object} post
    */
-  onPressTab = tabCategory => this.props.userStore.selectTab(tabCategory);
+  const onPressPostItem = post => {
+    postStore.setCurrentPost(post);
+    postStore.loadPostComments(post.id);
+    navigation.navigate("PostComment");
+  };
+
+  /**
+   * Update PhotoStore with selected album Object and navigate to PhotoGridScreen.
+   * @param {Object} album
+   */
+  const onPressPhotoAlbum = album => {
+    photoStore.setCurrentAlbum(album);
+    navigation.navigate("PhotoGrid");
+  };
 
   /**
    * Render the list with correct data, props passed and corresponding component for
@@ -75,18 +88,18 @@ class UserDetailScreen extends Component {
    * @return {JSX<Component>} <GenericList> with renderRowItem corresponding to category
    *                          default <View> if category is not matched with switch-case.
    */
-  renderCategoryList(category) {
+  const renderCategoryList = (category) => {
     switch (category) {
       case Constants.TAB_OPTION.POSTS:
         return (
           <GenericList
-            data={this.props.postStore.postList}
+            data={postStore.postList}
             onPressDisabled={true}
             renderRowItem={item => (
               <PostListItem
                 title={item.title}
                 body={item.body}
-                onPress={() => this.onPressPostItem(item)}
+                onPress={() => onPressPostItem(item)}
               />
             )}
           />
@@ -94,13 +107,13 @@ class UserDetailScreen extends Component {
       case Constants.TAB_OPTION.ALBUMS:
         return (
           <GenericList
-            data={this.props.photoStore.albumList}
+            data={photoStore.albumList}
             onPressDisabled={true}
             renderRowItem={item => (
               <AlbumListItem
                 title={item.title}
                 photoCount={item.photoCount}
-                onPress={() => this.onPressPhotoAlbum(item)}
+                onPress={() => onPressPhotoAlbum(item)}
               />
             )}
           />
@@ -108,7 +121,7 @@ class UserDetailScreen extends Component {
       case Constants.TAB_OPTION.TODOS:
         return (
           <GenericList
-            data={this.props.todoStore.todoList}
+            data={todoStore.todoList}
             renderRowItem={item => (
               <TodoListItem completed={item.completed} title={item.title} />
             )}
@@ -120,25 +133,19 @@ class UserDetailScreen extends Component {
     }
   }
 
-  /**
-   * Update PostStore with selected post Object, load related comments and
-   * navigate to PostCommentScreen.
-   * @param {Object} post
-   */
-  onPressPostItem = post => {
-    this.props.postStore.setCurrentPost(post);
-    this.props.postStore.loadPostComments(post.id);
-    this.props.navigation.navigate("PostComment");
-  };
-
-  /**
-   * Update PhotoStore with selected album Object and navigate to PhotoGridScreen.
-   * @param {Object} album
-   */
-  onPressPhotoAlbum = album => {
-    this.props.photoStore.setCurrentAlbum(album);
-    this.props.navigation.navigate("PhotoGrid");
-  };
+  return (
+    <View style={styles.container}>
+      <UserDetailCard details={selectedUserDetails} initials={initials} />
+      <View style={styles.tabs}>
+        {renderTab(Constants.TAB_OPTION.POSTS)}
+        {renderTab(Constants.TAB_OPTION.ALBUMS)}
+        {renderTab(Constants.TAB_OPTION.TODOS)}
+      </View>
+      <View style={styles.categoryContainer}>
+        {renderCategoryList(selectedTab)}
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -160,11 +167,11 @@ const styles = StyleSheet.create({
 });
 
 //to test injected stores
-UserDetailScreen.wrappedComponent.propTypes = {
-  userStore: PropTypes.object.isRequired,
-  postStore: PropTypes.object.isRequired,
-  photoStore: PropTypes.object.isRequired,
-  todoStore: PropTypes.object.isRequired
-};
+// UserDetailScreen.wrappedComponent.propTypes = {
+//   userStore: PropTypes.object.isRequired,
+//   postStore: PropTypes.object.isRequired,
+//   photoStore: PropTypes.object.isRequired,
+//   todoStore: PropTypes.object.isRequired
+// };
 
-export default UserDetailScreen;
+export default observer(UserDetailScreen);
