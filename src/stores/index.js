@@ -1,9 +1,8 @@
-import { createContext, useContext } from 'react';
-
-import UserStore from "./userStore";
-import PostStore from "./postStore";
-import PhotoStore from "./photoStore";
-import TodoStore from "./todoStore";
+import {createContext, useContext} from 'react';
+import UserStore from './userStore';
+import PostStore from './postStore';
+import PhotoStore from './photoStore';
+import TodoStore from './todoStore';
 
 const postStore = new PostStore();
 const photoStore = new PhotoStore();

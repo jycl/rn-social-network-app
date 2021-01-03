@@ -10,19 +10,7 @@ import UserListItem from '../../components/UserListItem';
 import colors from '../../styles/colors';
 import {observer} from 'mobx-react-lite';
 import {useStore} from '../../stores';
-
-type Props = {
-  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
-};
-
-type UserType = {
-  email: string;
-  id: number;
-  name: string;
-  phone: string;
-  username: string;
-  website: string;
-};
+import {NavigationProps, UserType} from '../../types';
 
 /**
  * UserListScreen is a screen that renders UI components displaying
@@ -30,7 +18,7 @@ type UserType = {
  *
  * @author Joshua Leung <joshuaycleung@gmail.com>
  */
-const UserListScreen = ({navigation}: Props) => {
+const UserListScreen = ({navigation}: NavigationProps) => {
   const {userStore} = useStore();
   useEffect(() => {
     userStore.loadUserList();
