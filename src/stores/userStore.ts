@@ -1,9 +1,7 @@
-import { observable, computed, toJS, action } from "mobx";
-import { getUserList } from "../services/APIService";
-import Constants from "../config/constants";
-import postStore from "./postStore";
-import photoStore from "./photoStore";
-import todoStore from "./todoStore";
+import {makeObservable, observable, computed, toJS, action} from 'mobx';
+import {getUserList} from '../services/APIService';
+import Constants from '../config/constants';
+import {UserType, UserDetailsType, TabType} from '../types';
 
 /**
  * UserStore is an MobX store that manages the state values related to the users
@@ -17,29 +15,48 @@ import todoStore from "./todoStore";
  * @param {Array} filteredUserList Sorted list of users based on sorting criteria (default by name)
  */
 class UserStore {
-  @observable
-  rawUserList = [];
-  @observable
-  selectedUser = null;
-  @observable
-  selectedTab = Constants.TAB_OPTION.POSTS;
+  rawUserList: UserType[] = [];
+  selectedUser: UserType | null = null;
+  selectedTab: TabType = Constants.TAB_OPTION.POSTS;
+  postStore;
+  photoStore;
+  todoStore;
+
+  constructor(postStore, photoStore, todoStore) {
+    makeObservable(this, {
+      rawUserList: observable,
+      selectedUser: observable,
+      selectedTab: observable,
+      setUserList: action,
+      selectUser: action,
+      selectTab: action,
+      loadDataByTabCategory: action,
+      resetSelection: action,
+      selectedUserDetails: computed,
+      filteredUserList: computed,
+    });
+    // make other store instances accessible to userStore https://stackoverflow.com/questions/44928645/
+    this.postStore = postStore;
+    this.photoStore = photoStore;
+    this.todoStore = todoStore;
+  }
 
   /**
    * Retrieve user list from backend and save to store
    */
-  @action
-  loadUserList = () => {
-    getUserList().then(rawUserList => {
-      this.rawUserList = rawUserList;
-    });
+  loadUserList = (): void => {
+    getUserList().then(this.setUserList);
+  };
+
+  setUserList = (list: UserType[]): void => {
+    this.rawUserList = list;
   };
 
   /**
    * Set the selected user (with displayed profile details)
    * @param {Object} user object selected from user list
    */
-  @action
-  selectUser = user => {
+  selectUser = (user: UserType): void => {
     this.selectedUser = user;
   };
 
@@ -47,8 +64,7 @@ class UserStore {
    * Set the selected user (with displayed profile details)
    * @param {Object} user object selected from user list
    */
-  @action
-  selectTab = category => {
+  selectTab = (category: TabType): void => {
     if (this.selectedTab !== category) {
       this.selectedTab = category;
       this.loadDataByTabCategory(category);
@@ -60,17 +76,19 @@ class UserStore {
    * store in order to render the related UI components with data.
    * @param {String} category selected tab title / category
    */
-  @action
-  loadDataByTabCategory(category) {
+  loadDataByTabCategory(category: TabType): void {
+    if (!this.selectedUser) {
+      return;
+    }
     switch (category) {
       case Constants.TAB_OPTION.POSTS:
-        postStore.loadPostHistory(this.selectedUser.id);
+        this.postStore.loadPostHistory(this.selectedUser.id);
         break;
       case Constants.TAB_OPTION.ALBUMS:
-        photoStore.loadPhotoAlbums(this.selectedUser.id);
+        this.photoStore.loadPhotoAlbums(this.selectedUser.id);
         break;
       case Constants.TAB_OPTION.TODOS:
-        todoStore.loadTodoList(this.selectedUser.id);
+        this.todoStore.loadTodoList(this.selectedUser.id);
         break;
       default:
         break;
@@ -82,19 +100,18 @@ class UserStore {
    * so that when a new user is selected the state params are not still rendered.
    * Note: Will clear the data from Post/Photo/TodoStores as well.
    */
-  @action
-  resetSelection = () => {
+  resetSelection = (): void => {
     this.selectedUser = null;
     this.selectedTab = Constants.TAB_OPTION.POSTS;
-    postStore.clearData();
-    photoStore.clearData();
-    todoStore.clearData();
+    this.postStore.clearData();
+    this.photoStore.clearData();
+    this.todoStore.clearData();
   };
 
   /**
    * @return {bool} inidcate whether current tab title is the selected one
    */
-  isHighlighted = tabTitle => {
+  isHighlighted = (tabTitle: TabType): boolean => {
     return tabTitle === this.selectedTab;
   };
 
@@ -103,19 +120,18 @@ class UserStore {
    * Properties address and workplace are extracted from the original
    * selectedUser object.
    */
-  @computed
-  get selectedUserDetails() {
+  get selectedUserDetails(): UserDetailsType {
     if (!this.selectedUser) {
       return {};
     }
-    const { address, company, email, name, phone } = this.selectedUser;
-    const { city, street, suite } = address;
+    const {address, company, email, name, phone} = this.selectedUser;
+    const {city, street, suite} = address;
     return {
       name,
       email,
       phone,
       address: `${suite} ${street}, ${city}`,
-      workplace: company.name
+      workplace: company.name,
     };
   }
 
@@ -124,13 +140,12 @@ class UserStore {
    * values should be cached as long as observable doesn't change.
    * @return {Array} sorted array of the rawUserList
    */
-  @computed
-  get filteredUserList() {
-    let filteredArray = toJS(this.rawUserList)
+  get filteredUserList(): UserType[] {
+    const filteredArray = toJS(this.rawUserList)
       .concat()
       .sort((lhsUser, rhsUser) => {
-        var nameLeft = lhsUser.name.toUpperCase(); // ignore upper and lowercase
-        var nameRight = rhsUser.name.toUpperCase(); // ignore upper and lowercase
+        const nameLeft = lhsUser.name.toUpperCase(); // ignore upper and lowercase
+        const nameRight = rhsUser.name.toUpperCase(); // ignore upper and lowercase
         if (nameLeft < nameRight) {
           return -1;
         }
@@ -143,5 +158,5 @@ class UserStore {
     return filteredArray;
   }
 }
-const userStore = new UserStore();
-export default userStore;
+
+export default UserStore;

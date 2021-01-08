@@ -1,9 +1,8 @@
-import React, { Component } from "react";
-import { inject, observer } from "mobx-react";
+import { observer } from "mobx-react-lite";
 import { Dimensions, Image, Text, View, StyleSheet } from "react-native";
 import colors from "../../styles/colors";
 import fontSize from "../../styles/fontSize";
-import PropTypes from "prop-types";
+import { useStore } from '../../stores';
 
 const WINDOW_WIDTH = Dimensions.get("window").width;
 /**
@@ -15,31 +14,29 @@ const WINDOW_WIDTH = Dimensions.get("window").width;
  *
  * @author Joshua Leung <joshuaycleung@gmail.com>
  */
-@inject("photoStore")
-@observer
-class PhotoDetailScreen extends Component {
-  render() {
-    const { currentPhoto } = this.props.photoStore;
-    if (!currentPhoto) {
-      return <View style={styles.container} />; //render default view if no photo set
-    }
-    return (
-      <View style={styles.container}>
-        <View style={styles.imageContainer}>
-          <Image
-            style={{
-              width: WINDOW_WIDTH - 10,
-              height: WINDOW_WIDTH - 10
-            }}
-            source={{ uri: currentPhoto.thumbnailUrl }}
-          />
-        </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.photoTitle}>{currentPhoto.title}</Text>
-        </View>
-      </View>
-    );
+// @inject("photoStore")
+const PhotoDetailScreen = () => {
+  const { photoStore } = useStore();
+  const { currentPhoto } = photoStore;
+  if (!currentPhoto) {
+    return <View style={styles.container} />; //render default view if no photo set
   }
+  return (
+    <View style={styles.container}>
+      <View style={styles.imageContainer}>
+        <Image
+          style={{
+            width: WINDOW_WIDTH - 10,
+            height: WINDOW_WIDTH - 10
+          }}
+          source={{ uri: currentPhoto.thumbnailUrl }}
+        />
+      </View>
+      <View style={styles.textContainer}>
+        <Text style={styles.photoTitle}>{currentPhoto.title}</Text>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -63,8 +60,4 @@ const styles = StyleSheet.create({
   }
 });
 
-PhotoDetailScreen.wrappedComponent.propTypes = {
-  photoStore: PropTypes.object.isRequired //to test injected stores
-};
-
-export default PhotoDetailScreen;
+export default observer(PhotoDetailScreen);

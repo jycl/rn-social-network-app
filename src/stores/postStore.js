@@ -1,4 +1,4 @@
-import { observable, computed, toJS, action } from "mobx";
+import { makeObservable, observable, computed, toJS, action } from "mobx";
 import {
   getPostHistoryForUser,
   getCommentsForPost
@@ -17,54 +17,54 @@ import {
  * @param {Array} currentPostCommentsList  list of comments that has been converted from MobX object
  */
 class PostStore {
-  @observable
   rawPostList = [];
-  @observable
   currentPost = null;
-  @observable
   currentPostComments = [];
+
+  constructor() {
+    makeObservable(this, {
+      rawPostList: observable,
+      currentPost: observable,
+      currentPostComments: observable,
+      setPostHistory: action,
+      setPostComments: action,
+      setCurrentPost: action,
+      clearData: action,
+      postList: computed,
+      currentPostCommentsList: computed,
+    });
+}
 
   /**
    * Retrieve post list from backend and save to store
    */
-  @action
-  loadPostHistory = userId => {
-    getPostHistoryForUser(userId).then(list => {
-      this.rawPostList = list;
-    });
-  };
+  loadPostHistory = userId => getPostHistoryForUser(userId).then(this.setPostHistory);      
 
-  @action
-  setCurrentPost = post => {
-    this.currentPost = post;
-  };
+  setPostHistory = list => this.rawPostList = list;
+
+  setCurrentPost = post => this.currentPost = post;
 
   /**
    * Retrieve comments for current post from backend and save to store
    */
-  @action
-  loadPostComments = postId => {
-    getCommentsForPost(postId).then(comments => {
-      this.currentPostComments = comments;
-    });
-  };
+  loadPostComments = postId => getCommentsForPost(postId).then(this.setPostComments);
 
-  @action
+  // set explicitly as action, otherwise need to use runInAction; see https://stackoverflow.com/questions/64770762
+  setPostComments = comments => this.currentPostComments = comments;
+
   clearData() {
     this.rawPostList = [];
     this.currentPost = null;
     this.currentPostComments = [];
   }
 
-  @computed
   get postList() {
     return toJS(this.rawPostList);
   }
 
-  @computed
   get currentPostCommentsList() {
     return toJS(this.currentPostComments);
   }
 }
-const postStore = new PostStore();
-export default postStore;
+
+export default PostStore;
