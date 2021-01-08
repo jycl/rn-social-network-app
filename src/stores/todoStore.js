@@ -20,7 +20,7 @@ class TodoStore {
       todoList: computed,
     });
   }
-  
+
   /**
    * Retrieve user list from backend and save to store
    */

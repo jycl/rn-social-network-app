@@ -1,6 +1,7 @@
-import { makeObservable, observable, computed, toJS, action } from "mobx";
-import { getUserList } from "../services/APIService";
-import Constants from "../config/constants";
+import {makeObservable, observable, computed, toJS, action} from 'mobx';
+import {getUserList} from '../services/APIService';
+import Constants from '../config/constants';
+import {UserType, UserDetailsType, TabType} from '../types';
 
 /**
  * UserStore is an MobX store that manages the state values related to the users
@@ -14,9 +15,9 @@ import Constants from "../config/constants";
  * @param {Array} filteredUserList Sorted list of users based on sorting criteria (default by name)
  */
 class UserStore {
-  rawUserList = [];
-  selectedUser = null;
-  selectedTab = Constants.TAB_OPTION.POSTS;
+  rawUserList: UserType[] = [];
+  selectedUser: UserType | null = null;
+  selectedTab: TabType = Constants.TAB_OPTION.POSTS;
   postStore;
   photoStore;
   todoStore;
@@ -38,20 +39,24 @@ class UserStore {
     this.postStore = postStore;
     this.photoStore = photoStore;
     this.todoStore = todoStore;
-}
+  }
 
   /**
    * Retrieve user list from backend and save to store
    */
-  loadUserList = () => getUserList().then(this.setUserList);
+  loadUserList = (): void => {
+    getUserList().then(this.setUserList);
+  };
 
-  setUserList = list => this.rawUserList = list;
+  setUserList = (list: UserType[]): void => {
+    this.rawUserList = list;
+  };
 
   /**
    * Set the selected user (with displayed profile details)
    * @param {Object} user object selected from user list
    */
-  selectUser = user => {
+  selectUser = (user: UserType): void => {
     this.selectedUser = user;
   };
 
@@ -59,7 +64,7 @@ class UserStore {
    * Set the selected user (with displayed profile details)
    * @param {Object} user object selected from user list
    */
-  selectTab = category => {
+  selectTab = (category: TabType): void => {
     if (this.selectedTab !== category) {
       this.selectedTab = category;
       this.loadDataByTabCategory(category);
@@ -71,7 +76,10 @@ class UserStore {
    * store in order to render the related UI components with data.
    * @param {String} category selected tab title / category
    */
-  loadDataByTabCategory(category) {
+  loadDataByTabCategory(category: TabType): void {
+    if (!this.selectedUser) {
+      return;
+    }
     switch (category) {
       case Constants.TAB_OPTION.POSTS:
         this.postStore.loadPostHistory(this.selectedUser.id);
@@ -92,7 +100,7 @@ class UserStore {
    * so that when a new user is selected the state params are not still rendered.
    * Note: Will clear the data from Post/Photo/TodoStores as well.
    */
-  resetSelection = () => {
+  resetSelection = (): void => {
     this.selectedUser = null;
     this.selectedTab = Constants.TAB_OPTION.POSTS;
     this.postStore.clearData();
@@ -103,7 +111,7 @@ class UserStore {
   /**
    * @return {bool} inidcate whether current tab title is the selected one
    */
-  isHighlighted = tabTitle => {
+  isHighlighted = (tabTitle: TabType): boolean => {
     return tabTitle === this.selectedTab;
   };
 
@@ -112,18 +120,18 @@ class UserStore {
    * Properties address and workplace are extracted from the original
    * selectedUser object.
    */
-  get selectedUserDetails() {
+  get selectedUserDetails(): UserDetailsType {
     if (!this.selectedUser) {
       return {};
     }
-    const { address, company, email, name, phone } = this.selectedUser;
-    const { city, street, suite } = address;
+    const {address, company, email, name, phone} = this.selectedUser;
+    const {city, street, suite} = address;
     return {
       name,
       email,
       phone,
       address: `${suite} ${street}, ${city}`,
-      workplace: company.name
+      workplace: company.name,
     };
   }
 
@@ -132,12 +140,12 @@ class UserStore {
    * values should be cached as long as observable doesn't change.
    * @return {Array} sorted array of the rawUserList
    */
-  get filteredUserList() {
-    let filteredArray = toJS(this.rawUserList)
+  get filteredUserList(): UserType[] {
+    const filteredArray = toJS(this.rawUserList)
       .concat()
       .sort((lhsUser, rhsUser) => {
-        var nameLeft = lhsUser.name.toUpperCase(); // ignore upper and lowercase
-        var nameRight = rhsUser.name.toUpperCase(); // ignore upper and lowercase
+        const nameLeft = lhsUser.name.toUpperCase(); // ignore upper and lowercase
+        const nameRight = rhsUser.name.toUpperCase(); // ignore upper and lowercase
         if (nameLeft < nameRight) {
           return -1;
         }

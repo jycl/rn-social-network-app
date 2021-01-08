@@ -8,6 +8,12 @@ export type NavigationProps = {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 };
 
+export type AddressType = {
+  city: string;
+  street: string;
+  suite: string;
+};
+
 export type UserType = {
   email: string;
   id: number;
@@ -15,6 +21,16 @@ export type UserType = {
   phone: string;
   username: string;
   website: string;
+  address: AddressType;
+  company: {name: string};
+};
+
+export type UserDetailsType = {
+  name?: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+  workplace?: string;
 };
 
 export type PostType = {

@@ -1,5 +1,5 @@
-import { makeObservable, observable, computed, toJS, action } from "mobx";
-import { getAlbumsForUser, getPhotosForAlbum } from "../services/APIService";
+import {makeObservable, observable, computed, toJS, action} from 'mobx';
+import {getAlbumsForUser, getPhotosForAlbum} from '../services/APIService';
 
 /**
  * PhotoStore is an MobX store that manages the state values of components related

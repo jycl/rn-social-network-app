@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {View, StyleSheet} from 'react-native';
-
 import colors from '../../styles/colors';
 import {observer} from 'mobx-react-lite';
 import Tab from '../../components/Tab';

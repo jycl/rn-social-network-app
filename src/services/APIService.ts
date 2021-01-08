@@ -1,3 +1,12 @@
+import {
+  UserType,
+  PhotoType,
+  PostType,
+  CommentType,
+  AlbumType,
+  TodoType,
+} from '../types';
+
 /**
  * APIService encapsulates all backend API calls to https://jsonplaceholder.typicode.com/.
  * The URLs for the API calls are listed in the APIConfig.
@@ -10,25 +19,25 @@
  */
 
 export const APIConfig = {
-  POSTS: "https://jsonplaceholder.typicode.com/posts/",
-  COMMENTS: "https://jsonplaceholder.typicode.com/comments/",
-  ALBUMS: "https://jsonplaceholder.typicode.com/albums/",
-  PHOTOS: "https://jsonplaceholder.typicode.com/photos/",
-  TODOS: "https://jsonplaceholder.typicode.com/todos/",
-  USERS: "https://jsonplaceholder.typicode.com/users/"
+  POSTS: 'https://jsonplaceholder.typicode.com/posts/',
+  COMMENTS: 'https://jsonplaceholder.typicode.com/comments/',
+  ALBUMS: 'https://jsonplaceholder.typicode.com/albums/',
+  PHOTOS: 'https://jsonplaceholder.typicode.com/photos/',
+  TODOS: 'https://jsonplaceholder.typicode.com/todos/',
+  USERS: 'https://jsonplaceholder.typicode.com/users/',
 };
 
 /**
  * Invoke global fetch method to fetch resources from the input
  * url and fetch options
  * @param {String} url resource location (only URL in this case) to attempt to fetch from
- * @param {Obect} fetchOptions object with key-value for request settings, for more details see:
+ * @param {Object} fetchOptions object with key-value for request settings, for more details see:
  *                https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch
  * @return {Response.JSON} JSON returned from .json() call on response
  */
-async function _fetchWithParams(url, fetchOptions) {
+async function _fetchWithParams(url: string, fetchOptions: RequestInit) {
   try {
-    let response = await fetch(url, fetchOptions);
+    const response = await fetch(url, fetchOptions);
     if (response.ok && response.json) {
       return response.json();
     } else {
@@ -45,10 +54,10 @@ async function _fetchWithParams(url, fetchOptions) {
  * @param {String} url URL to make HTTP GET request to from
  * @return {Response.JSON} JSON returned from .json() call on response
  */
-export async function get(url) {
+export async function get(url: string): Promise<[]> {
   return await _fetchWithParams(url, {
-    method: "GET",
-    headers: { "Content-Type": "application/json; charset=utf-8" }
+    method: 'GET',
+    headers: {'Content-Type': 'application/json; charset=utf-8'},
   });
 }
 
@@ -56,7 +65,7 @@ export async function get(url) {
  * Get full user list from backend
  * @return {Array<Objects>} each object represents user details
  */
-export async function getUserList() {
+export async function getUserList(): Promise<UserType[]> {
   return await get(APIConfig.USERS);
 }
 
@@ -65,7 +74,9 @@ export async function getUserList() {
  * @param {String} userId used to query posts with this userId
  * @return {Array<Objects>} each object represents a post
  */
-export async function getPostHistoryForUser(userId) {
+export async function getPostHistoryForUser(
+  userId: number,
+): Promise<PostType[]> {
   const url = APIConfig.POSTS + `?userId=${userId}`;
   return await get(url);
 }
@@ -75,7 +86,9 @@ export async function getPostHistoryForUser(userId) {
  * @param {String} postId parent Id used to query comments with this postId
  * @return {Array<Objects>} each object represents a post record
  */
-export async function getCommentsForPost(postId) {
+export async function getCommentsForPost(
+  postId: number,
+): Promise<CommentType[]> {
   const url = APIConfig.COMMENTS + `?postId=${postId}`;
   return await get(url);
 }
@@ -85,7 +98,7 @@ export async function getCommentsForPost(postId) {
  * @param {String} userId parent Id used to query comments with this postId
  * @return {Array<Objects>} each object represents an album record
  */
-export async function getAlbumsForUser(userId) {
+export async function getAlbumsForUser(userId: number): Promise<AlbumType[]> {
   const url = APIConfig.ALBUMS + `?userId=${userId}`;
   return await get(url);
 }
@@ -95,7 +108,7 @@ export async function getAlbumsForUser(userId) {
  * @param {String} albumId parent Id used to query photos with this albumId
  * @return {Array<Objects>} each object represents a photo record
  */
-export async function getPhotosForAlbum(albumId) {
+export async function getPhotosForAlbum(albumId: number): Promise<PhotoType[]> {
   const url = APIConfig.PHOTOS + `?albumId=${albumId}`;
   return await get(url);
 }
@@ -105,7 +118,7 @@ export async function getPhotosForAlbum(albumId) {
  * @param {String} userId parent Id used to query todos with this userId
  * @return {Array<Objects>} each object represents a todo record
  */
-export async function getTodosForUser(userId) {
+export async function getTodosForUser(userId: number): Promise<TodoType[]> {
   const url = APIConfig.TODOS + `?userId=${userId}`;
   return await get(url);
 }

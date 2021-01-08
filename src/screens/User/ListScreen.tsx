@@ -1,10 +1,5 @@
 import React, {useEffect} from 'react';
 import {View, StyleSheet} from 'react-native';
-import {
-  NavigationParams,
-  NavigationScreenProp,
-  NavigationState,
-} from 'react-navigation';
 import GenericList from '../../components/GenericList';
 import UserListItem from '../../components/UserListItem';
 import colors from '../../styles/colors';
